@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/npm/@fonts/geist@1.0.0/files/geist-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/npm/@fonts/geist@1.0.0/files/geist-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/npm/@fonts/geist@1.0.0/files/geist-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/npm/@fonts/geist@1.0.0/files/geist-600.woff2') format('woff2');
+}
+
+:root {
+  --bg: oklch(98% 0.004 220);
+  --bg-elev: oklch(99.5% 0.002 220);
+  --bg-deep: oklch(18% 0.012 220);
+  --ink: oklch(20% 0.01 60);
+  --ink-soft: oklch(38% 0.012 60);
+  --ink-mute: oklch(55% 0.012 60);
+  --line: oklch(91% 0.006 220);
+  --line-soft: oklch(94% 0.004 220);
+  --accent: oklch(42% 0.06 200);
+  --accent-soft: oklch(94% 0.018 200);
+  --on-accent: oklch(98% 0.005 200);
+
+  --serif: "Instrument Serif", Georgia, serif;
+  --sans: "Geist", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius-sm: 10px;
+  --radius: 14px;
+  --radius-lg: 20px;
+
+  --shadow-1: 0 1px 0 rgba(20, 18, 14, 0.04), 0 1px 2px rgba(20, 18, 14, 0.03);
+  --shadow-2: 0 1px 0 rgba(20, 18, 14, 0.04), 0 10px 30px -12px rgba(20, 18, 14, 0.10);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 720px) {
+  .wrap {
+    padding: 0 20px;
+  }
+}
+
+section {
+  padding: 110px 0;
+}
+
+@media (max-width: 820px) {
+  section {
+    padding: 72px 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px oklch(62% 0.12 145 / 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 8px oklch(62% 0.12 145 / 0.04);
+  }
+}
+
+@keyframes globepin {
+  0%, 100% {
+    box-shadow: 0 0 0 5px rgba(184, 216, 226, 0.30),
+      0 0 18px rgba(184, 216, 226, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(184, 216, 226, 0.05),
+      0 0 24px rgba(184, 216, 226, 0.35);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: oklch(82% 0.05 200);
+  color: var(--ink);
+}
