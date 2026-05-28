@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import styled, { keyframes } from "styled-components";
+import landCoords from "../data/land-dots.json";
 
 const SVGContainer = styled.div`
   width: 100%;
@@ -39,10 +40,10 @@ const GlobeHalo = styled.circle<{ $delay?: number }>`
   animation-delay: ${(p) => p.$delay ?? 0}s;
 `;
 
-// VIEW_LNG = 10 → globe front face is centered on lng 100°E (Southeast Asia)
+// Globe projection — must match the params used in gen_land_dots.js
 const RADIUS = 160;
 const PERSPECTIVE = 700;
-const VIEW_LNG = 10;
+const VIEW_LNG = 10; // centers ~100°E (Southeast Asia) on front face
 
 function latLngToXYZ(lat: number, lng: number, r: number = RADIUS) {
   const φ = (lat * Math.PI) / 180;
@@ -63,25 +64,17 @@ function visible(z: number) {
   return z > -RADIUS * 0.1;
 }
 
-function computeGlobeDots() {
-  const out: Array<{ cx: number; cy: number; r: number; op: number }> = [];
-  for (let lat = -82; lat <= 82; lat += 5) {
-    const n = Math.max(1, Math.round(60 * Math.cos((lat * Math.PI) / 180)));
-    for (let i = 0; i < n; i++) {
-      const lng = (360 / n) * i - 180;
-      const c = latLngToXYZ(lat, lng);
-      if (!visible(c.z)) continue;
-      const p = project(c.x, c.y, c.z);
-      const depth = (c.z + RADIUS) / (2 * RADIUS);
-      out.push({
-        cx: parseFloat(p.x.toFixed(1)),
-        cy: parseFloat(p.y.toFixed(1)),
-        r:  parseFloat((0.9 + depth * 0.9).toFixed(2)),
-        op: parseFloat((0.14 + depth * 0.52).toFixed(2)),
-      });
-    }
-  }
-  return out;
+function arcPath(x1: number, y1: number, x2: number, y2: number) {
+  const mx = (x1 + x2) / 2;
+  const my = (y1 + y2) / 2;
+  const dx = x2 - x1, dy = y2 - y1;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  if (dist < 1) return `M ${x1} ${y1} L ${x2} ${y2}`;
+  const len = Math.sqrt(mx * mx + my * my);
+  if (len < 1) return `M ${x1} ${y1} L ${x2} ${y2}`;
+  const cpX = mx + (mx / len) * dist * 0.3;
+  const cpY = my + (my / len) * dist * 0.3;
+  return `M ${x1} ${y1} Q ${cpX.toFixed(1)} ${cpY.toFixed(1)} ${x2} ${y2}`;
 }
 
 const cities: Array<{
@@ -91,7 +84,7 @@ const cities: Array<{
   dx: number; dy: number;
   anchor?: "start" | "end" | "middle";
 }> = [
-  { name: "Jakarta",      sub: "Indonesia", lat:  -6.2088, lng: 106.8456, primary: true,  dx:  10, dy:  4 },
+  { name: "Jakarta",      sub: "Indonesia", lat:  -6.2088, lng: 106.8456, primary: true,  dx:  10, dy:   4 },
   { name: "Singapore",    lat:   1.3521, lng: 103.8198, primary: true,  dx:  10, dy: -10 },
   { name: "Bangkok",      lat:  13.7563, lng: 100.5018, primary: true,  dx:  10, dy:  -9 },
   { name: "Kuala Lumpur", lat:   3.1390, lng: 101.6869, primary: true,  dx:  10, dy:  14 },
@@ -111,22 +104,21 @@ const routes = [
   { from: "Dubai",     to: "Singapore"    },
 ];
 
-function arcPath(x1: number, y1: number, x2: number, y2: number) {
-  const mx = (x1 + x2) / 2;
-  const my = (y1 + y2) / 2;
-  const dx = x2 - x1, dy = y2 - y1;
-  const dist = Math.sqrt(dx * dx + dy * dy);
-  if (dist < 1) return `M ${x1} ${y1} L ${x2} ${y2}`;
-  const len = Math.sqrt(mx * mx + my * my);
-  if (len < 1) return `M ${x1} ${y1} L ${x2} ${y2}`;
-  const cpX = mx + (mx / len) * dist * 0.3;
-  const cpY = my + (my / len) * dist * 0.3;
-  return `M ${x1} ${y1} Q ${cpX.toFixed(1)} ${cpY.toFixed(1)} ${x2} ${y2}`;
-}
-
 export function GlobeVisualization() {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const DOTS = useMemo(() => computeGlobeDots(), []);
+  // Project pre-computed land [lat, lng] pairs → SVG coordinates
+  const landDots = useMemo(() => {
+    return (landCoords as [number, number][]).map(([lat, lng]) => {
+      const c = latLngToXYZ(lat, lng);
+      const p = project(c.x, c.y, c.z);
+      const depth = (c.z + RADIUS) / (2 * RADIUS); // 0=limb, 1=center
+      return {
+        cx: parseFloat(p.x.toFixed(1)),
+        cy: parseFloat(p.y.toFixed(1)),
+        r:  parseFloat((1.1 + depth * 0.8).toFixed(2)),
+        op: parseFloat((0.22 + depth * 0.48).toFixed(2)),
+      };
+    });
+  }, []);
 
   const cityCoords = cities.map((city) => {
     const xyz = latLngToXYZ(city.lat, city.lng);
@@ -144,8 +136,8 @@ export function GlobeVisualization() {
       <SVG viewBox="-240 -240 480 480" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="globeBg" cx="50%" cy="50%">
-            <stop offset="0%"   stopColor="oklch(16% 0.02 218)" stopOpacity="1" />
-            <stop offset="100%" stopColor="oklch(8%  0.01 218)" stopOpacity="1" />
+            <stop offset="0%"   stopColor="oklch(13% 0.02 218)" stopOpacity="1" />
+            <stop offset="100%" stopColor="oklch(6%  0.01 218)"  stopOpacity="1" />
           </radialGradient>
           <filter id="cityGlow" x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur stdDeviation="4" result="blur" />
@@ -163,22 +155,22 @@ export function GlobeVisualization() {
           </filter>
         </defs>
 
-        {/* Globe sphere */}
+        {/* Dark ocean sphere */}
         <circle cx="0" cy="0" r={RADIUS} fill="url(#globeBg)" />
 
-        {/* Dot field */}
-        {DOTS.map((d, i) => (
+        {/* Land dot field — each dot is a land coordinate */}
+        {landDots.map((d, i) => (
           <circle
             key={i}
             cx={d.cx}
             cy={d.cy}
             r={d.r}
-            fill="oklch(74% 0.08 196)"
+            fill="oklch(72% 0.07 196)"
             opacity={d.op}
           />
         ))}
 
-        {/* Settlement routes */}
+        {/* Settlement route arcs */}
         <g filter="url(#routeGlow)">
           {routeCoords.map((route, idx) => {
             if (!route.from || !route.to) return null;
@@ -205,17 +197,9 @@ export function GlobeVisualization() {
             const delay = parseFloat((idx * 0.32).toFixed(2));
             return (
               <g key={city.name}>
-                <GlobeHalo
-                  cx={city.px}
-                  cy={city.py}
-                  r={r + 2}
-                  fill="oklch(80% 0.1 196)"
-                  $delay={delay}
-                />
+                <GlobeHalo cx={city.px} cy={city.py} r={r + 2} fill="oklch(80% 0.1 196)" $delay={delay} />
                 <GlobeDot
-                  cx={city.px}
-                  cy={city.py}
-                  r={r}
+                  cx={city.px} cy={city.py} r={r}
                   fill={city.primary ? "white" : "oklch(80% 0.1 196)"}
                   $delay={delay}
                 />
@@ -236,10 +220,10 @@ export function GlobeVisualization() {
                     x={city.px + city.dx}
                     y={city.py + city.dy + 13}
                     textAnchor={city.anchor ?? "start"}
-                    fill="oklch(68% 0.06 196)"
+                    fill="oklch(65% 0.06 196)"
                     fontSize="9"
                     fontFamily="var(--sans)"
-                    opacity="0.75"
+                    opacity="0.7"
                   >
                     {city.sub}
                   </text>
@@ -250,7 +234,7 @@ export function GlobeVisualization() {
         </g>
 
         {/* Specular highlight */}
-        <ellipse cx="-30" cy="-55" rx="60" ry="70" fill="white" opacity="0.025" />
+        <ellipse cx="-30" cy="-55" rx="60" ry="70" fill="white" opacity="0.02" />
       </SVG>
     </SVGContainer>
   );
