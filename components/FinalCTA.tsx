@@ -1,6 +1,7 @@
 "use client";
 
 import styled from "styled-components";
+import { Reveal } from "./Reveal";
 
 const FinalCTASection = styled.section`
   text-align: center;
@@ -32,9 +33,7 @@ const H2 = styled.h2`
   margin: 0 0 18px;
   text-wrap: balance;
 
-  em {
-    font-style: italic;
-  }
+  em { font-style: italic; }
 `;
 
 const Sub = styled.p`
@@ -97,16 +96,16 @@ export function FinalCTA() {
   return (
     <FinalCTASection>
       <Wrap>
-        <H2>
-          Start with a simple <em>settlement flow.</em>
-        </H2>
-        <Sub>
-          Use Dexrl to move between stablecoins and digital assets through a guided swap experience.
-        </Sub>
-        <CTAButtons>
-          <Button>Swap Now</Button>
-          <Button variant="ghost">Talk to our team</Button>
-        </CTAButtons>
+        <Reveal delay={0}   y={32}><H2>Start with a simple <em>settlement flow.</em></H2></Reveal>
+        <Reveal delay={100} y={24}>
+          <Sub>Use Dexrl to move between stablecoins and digital assets through a guided swap experience.</Sub>
+        </Reveal>
+        <Reveal delay={200} y={20}>
+          <CTAButtons>
+            <Button>Swap Now</Button>
+            <Button variant="ghost">Talk to our team</Button>
+          </CTAButtons>
+        </Reveal>
       </Wrap>
     </FinalCTASection>
   );

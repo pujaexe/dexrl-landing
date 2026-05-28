@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import { GlobeVisualization } from "./GlobeVisualization";
+import { Reveal } from "./Reveal";
 
 const GlobeSection = styled.section``;
 
@@ -111,25 +112,29 @@ export function Globe() {
   return (
     <GlobeSection>
       <Wrap>
-        <GlobeStage>
-          <GlobeCopy>
-            <SectionEyebrow>Corridors</SectionEyebrow>
-            <H2>
-              Stablecoin rails <em>across Asia.</em>
-            </H2>
-            <Sub>
-              Dexrl opens direct stablecoin settlement flows between countries, enabling from Indonesia and supporting similar flows.
-            </Sub>
-            <GlobeMeta>
-              <div>
-                <b>Indonesia</b> to Singapore
-              </div>
-            </GlobeMeta>
-          </GlobeCopy>
-          <GlobeVisual>
-            <GlobeVisualization />
-          </GlobeVisual>
-        </GlobeStage>
+        <Reveal y={40}>
+          <GlobeStage>
+            <GlobeCopy>
+              <Reveal delay={80}><SectionEyebrow>Corridors</SectionEyebrow></Reveal>
+              <Reveal delay={160}>
+                <H2>Stablecoin rails <em>across Asia.</em></H2>
+              </Reveal>
+              <Reveal delay={240}>
+                <Sub>
+                  Dexrl opens direct stablecoin settlement flows between countries, enabling from Indonesia and supporting similar flows.
+                </Sub>
+              </Reveal>
+              <Reveal delay={320}>
+                <GlobeMeta>
+                  <div><b>Indonesia</b> to Singapore</div>
+                </GlobeMeta>
+              </Reveal>
+            </GlobeCopy>
+            <GlobeVisual>
+              <GlobeVisualization />
+            </GlobeVisual>
+          </GlobeStage>
+        </Reveal>
       </Wrap>
     </GlobeSection>
   );

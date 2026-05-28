@@ -1,6 +1,9 @@
 "use client";
 
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
+import { Reveal } from "./Reveal";
+import { useInView } from "../hooks/useInView";
 
 const FiatSection = styled.section`
   background: oklch(96% 0.008 85);
@@ -51,9 +54,7 @@ const H2 = styled.h2`
   margin: 0 0 16px;
   text-wrap: balance;
 
-  em {
-    font-style: italic;
-  }
+  em { font-style: italic; }
 `;
 
 const Sub = styled.p`
@@ -65,10 +66,31 @@ const Sub = styled.p`
   margin: 0;
 `;
 
-const PartnersGrid = styled.div`
+const PartnersGrid = styled.div<{ $inView: boolean }>`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
+
+  & > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity  0.62s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  ${(p) =>
+    p.$inView &&
+    css`
+      & > *:nth-child(1) { opacity: 1; transform: none; transition-delay:   0ms; }
+      & > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 100ms; }
+      & > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 200ms; }
+      & > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 300ms; }
+    `}
+
+  @media (prefers-reduced-motion: reduce) {
+    & > * { transition: opacity 0.3s ease; transform: none !important; }
+  }
 `;
 
 const Partner = styled.div`
@@ -103,48 +125,35 @@ const PartnerRegion = styled.div`
 `;
 
 const partners = [
-  {
-    role: "Partner provider",
-    name: "Binance fiat partner",
-    region: "Southeast Asia",
-  },
-  {
-    role: "Settlement provider",
-    name: "Crypto settlement hub",
-    region: "Asia Pacific",
-  },
-  {
-    role: "License provider",
-    name: "Institutional liquidity call",
-    region: "Singapore",
-  },
-  {
-    role: "Currency provider",
-    name: "Local settlement bank",
-    region: "Indonesia",
-  },
+  { role: "Partner provider",     name: "Binance fiat partner",       region: "Southeast Asia" },
+  { role: "Settlement provider",  name: "Crypto settlement hub",      region: "Asia Pacific"   },
+  { role: "License provider",     name: "Institutional liquidity call", region: "Singapore"    },
+  { role: "Currency provider",    name: "Local settlement bank",      region: "Indonesia"      },
 ];
 
 export function Fiat() {
+  const { ref, inView } = useInView();
   return (
-    <FiatSection>
+    <FiatSection ref={ref as React.RefObject<HTMLElement>}>
       <Wrap>
         <FiatGrid>
           <div>
-            <SectionEyebrow>Fiat redemptions</SectionEyebrow>
-            <H2>
-              Fiat services, <em>when needed,</em> are handled by licensed providers.
-            </H2>
-            <Sub>
-              Dexrl supports stablecoin-based settlement flows. When fiat entry or exit is required, licensed fiat providers integrate into the settlement rails.
-            </Sub>
+            <Reveal delay={0}><SectionEyebrow>Fiat redemptions</SectionEyebrow></Reveal>
+            <Reveal delay={90}>
+              <H2>Fiat services, <em>when needed,</em> are handled by licensed providers.</H2>
+            </Reveal>
+            <Reveal delay={170}>
+              <Sub>
+                Dexrl supports stablecoin-based settlement flows. When fiat entry or exit is required, licensed fiat providers integrate into the settlement rails.
+              </Sub>
+            </Reveal>
           </div>
-          <PartnersGrid>
-            {partners.map((partner, idx) => (
+          <PartnersGrid $inView={inView}>
+            {partners.map((p, idx) => (
               <Partner key={idx}>
-                <PartnerRole>{partner.role}</PartnerRole>
-                <PartnerName>{partner.name}</PartnerName>
-                <PartnerRegion>{partner.region}</PartnerRegion>
+                <PartnerRole>{p.role}</PartnerRole>
+                <PartnerName>{p.name}</PartnerName>
+                <PartnerRegion>{p.region}</PartnerRegion>
               </Partner>
             ))}
           </PartnersGrid>

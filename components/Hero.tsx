@@ -1,6 +1,20 @@
 "use client";
 
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const fadeUp = keyframes`
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+`;
+
+const FadeUp = styled.div<{ $delay?: number }>`
+  animation: ${fadeUp} 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: ${(p) => p.$delay ?? 0}ms;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`;
 
 const HeroSection = styled.section`
   padding: 80px 0 96px;
@@ -352,26 +366,35 @@ export function Hero() {
       <Wrap>
         <HeroGrid>
           <HeroContent>
-            <Eyebrow>FOR MODERN BUSINESSES</Eyebrow>
-            <H1>
-              Global crypto settlement, <em>made simple.</em>
-            </H1>
-            <Lede>
-              Dexrl helps businesses move between stablecoins and digital assets
-              through a guided swap experience. No trading screens. No Web3 confusion.
-              Just simple settlement flows for modern businesses.
-            </Lede>
-            <HeroCTAs>
-              <Button>Swap Now →</Button>
-              <Button variant="ghost">Talk to our team</Button>
-            </HeroCTAs>
-            <HeroTrust>
-              <span>Non-custodial by design</span>
-              <span>Stablecoin rails across Asia</span>
-              <span>Settles in minutes</span>
-            </HeroTrust>
+            <FadeUp $delay={0}><Eyebrow>FOR MODERN BUSINESSES</Eyebrow></FadeUp>
+            <FadeUp $delay={90}>
+              <H1>
+                Global crypto settlement, <em>made simple.</em>
+              </H1>
+            </FadeUp>
+            <FadeUp $delay={180}>
+              <Lede>
+                Dexrl helps businesses move between stablecoins and digital assets
+                through a guided swap experience. No trading screens. No Web3 confusion.
+                Just simple settlement flows for modern businesses.
+              </Lede>
+            </FadeUp>
+            <FadeUp $delay={260}>
+              <HeroCTAs>
+                <Button>Swap Now →</Button>
+                <Button variant="ghost">Talk to our team</Button>
+              </HeroCTAs>
+            </FadeUp>
+            <FadeUp $delay={340}>
+              <HeroTrust>
+                <span>Non-custodial by design</span>
+                <span>Stablecoin rails across Asia</span>
+                <span>Settles in minutes</span>
+              </HeroTrust>
+            </FadeUp>
           </HeroContent>
 
+          <FadeUp $delay={140}>
           <SwapBox>
             <SwapHead>
               <SwapTitle>Business settlement</SwapTitle>
@@ -424,6 +447,7 @@ export function Hero() {
 
             <SwapCTA>Swap to USDC</SwapCTA>
           </SwapBox>
+          </FadeUp>
         </HeroGrid>
       </Wrap>
     </HeroSection>

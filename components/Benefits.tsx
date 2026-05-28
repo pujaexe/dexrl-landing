@@ -1,6 +1,9 @@
 "use client";
 
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
+import { Reveal } from "./Reveal";
+import { useInView } from "../hooks/useInView";
 
 const BenefitsSection = styled.section``;
 
@@ -46,13 +49,33 @@ const H2 = styled.h2`
   }
 `;
 
-const BCardsGrid = styled.div`
+const BCardsGrid = styled.div<{ $inView: boolean }>`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 
   @media (max-width: 860px) {
     grid-template-columns: 1fr;
+  }
+
+  & > * {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity  0.68s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.68s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  ${(p) =>
+    p.$inView &&
+    css`
+      & > *:nth-child(1) { opacity: 1; transform: none; transition-delay:   0ms; }
+      & > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 120ms; }
+      & > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 240ms; }
+    `}
+
+  @media (prefers-reduced-motion: reduce) {
+    & > * { transition: opacity 0.3s ease; transform: none !important; }
   }
 `;
 
@@ -65,12 +88,11 @@ const BCard = styled.div`
   flex-direction: column;
   gap: 14px;
   min-height: 240px;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     border-color: oklch(82% 0.012 75);
     box-shadow: var(--shadow-2);
-    transform: translateY(-2px);
   }
 `;
 
@@ -99,39 +121,26 @@ const CardP = styled.p`
 `;
 
 const benefits = [
-  {
-    num: "01",
-    title: "Simple swaps",
-    description: "Move between stablecoins and digital assets through a clean, guided flow",
-  },
-  {
-    num: "02",
-    title: "Business-ready",
-    description: "Use it through a licensed swap arrangement, embed custom interface, or operate integration",
-  },
-  {
-    num: "03",
-    title: "Users stay in control",
-    description: "Each user withdraws settlement instructions, stay connected through secure wallet access",
-  },
+  { num: "01", title: "Simple swaps",          description: "Move between stablecoins and digital assets through a clean, guided flow" },
+  { num: "02", title: "Business-ready",         description: "Use it through a licensed swap arrangement, embed custom interface, or operate integration" },
+  { num: "03", title: "Users stay in control",  description: "Each user withdraws settlement instructions, stay connected through secure wallet access" },
 ];
 
 export function Benefits() {
+  const { ref, inView } = useInView();
   return (
-    <BenefitsSection id="benefits">
+    <BenefitsSection id="benefits" ref={ref as React.RefObject<HTMLElement>}>
       <Wrap>
         <SectionHead>
-          <SectionEyebrow>What it is</SectionEyebrow>
-          <H2>
-            Built for <em>simple</em> business settlement.
-          </H2>
+          <Reveal delay={0}><SectionEyebrow>What it is</SectionEyebrow></Reveal>
+          <Reveal delay={90}><H2>Built for <em>simple</em> business settlement.</H2></Reveal>
         </SectionHead>
-        <BCardsGrid>
-          {benefits.map((benefit) => (
-            <BCard key={benefit.num}>
-              <CardNum>{benefit.num}</CardNum>
-              <CardH3>{benefit.title}</CardH3>
-              <CardP>{benefit.description}</CardP>
+        <BCardsGrid $inView={inView}>
+          {benefits.map((b) => (
+            <BCard key={b.num}>
+              <CardNum>{b.num}</CardNum>
+              <CardH3>{b.title}</CardH3>
+              <CardP>{b.description}</CardP>
             </BCard>
           ))}
         </BCardsGrid>

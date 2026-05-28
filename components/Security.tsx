@@ -1,7 +1,10 @@
 "use client";
 
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
 import { Lock, Key, CheckCircle2 } from "lucide-react";
+import { Reveal } from "./Reveal";
+import { useInView } from "../hooks/useInView";
 
 const SecuritySection = styled.section``;
 
@@ -48,9 +51,7 @@ const H2 = styled.h2`
   margin: 0 0 16px;
   text-wrap: balance;
 
-  em {
-    font-style: italic;
-  }
+  em { font-style: italic; }
 `;
 
 const Sub = styled.p`
@@ -62,10 +63,31 @@ const Sub = styled.p`
   margin: 0;
 `;
 
-const SecPoints = styled.div`
+const SecPoints = styled.div<{ $inView: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  & > * {
+    opacity: 0;
+    transform: translateX(20px);
+    transition:
+      opacity  0.65s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  ${(p) =>
+    p.$inView &&
+    css`
+      & > *:nth-child(1) { opacity: 1; transform: none; transition-delay:   0ms; }
+      & > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 120ms; }
+      & > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 240ms; }
+      & > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 360ms; }
+    `}
+
+  @media (prefers-reduced-motion: reduce) {
+    & > * { transition: opacity 0.3s ease; transform: none !important; }
+  }
 `;
 
 const SecPoint = styled.div`
@@ -75,9 +97,7 @@ const SecPoint = styled.div`
   padding: 22px 0;
   border-bottom: 1px solid var(--line-soft);
 
-  &:last-child {
-    border-bottom: none;
-  }
+  &:last-child { border-bottom: none; }
 `;
 
 const SecIcon = styled.div`
@@ -89,7 +109,6 @@ const SecIcon = styled.div`
   color: var(--accent);
   display: grid;
   place-items: center;
-  font-size: 18px;
 `;
 
 const SecText = styled.div`
@@ -110,42 +129,32 @@ const SecDisclaim = styled.div`
 `;
 
 const points = [
-  {
-    icon: Lock,
-    text: "Dedicated settlement wallet for each user",
-  },
-  {
-    icon: Key,
-    text: "Passkey or email-based access",
-  },
-  {
-    icon: CheckCircle2,
-    text: "User-authorized settlement instructions",
-  },
+  { icon: Lock,         text: "Dedicated settlement wallet for each user" },
+  { icon: Key,          text: "Passkey or email-based access" },
+  { icon: CheckCircle2, text: "User-authorized settlement instructions" },
 ];
 
 export function Security() {
+  const { ref, inView } = useInView();
   return (
-    <SecuritySection id="security">
+    <SecuritySection id="security" ref={ref as React.RefObject<HTMLElement>}>
       <Wrap>
         <SecGrid>
           <div>
-            <SectionEyebrow>Security & control</SectionEyebrow>
-            <H2>
-              Designed so users <em>stay in control.</em>
-            </H2>
-            <Sub>
-              Dexrl is designed as a non-custodial setup and wallet access. Users authorized settlement instructions, and wallet access remains controlled through secure authentication.
-            </Sub>
+            <Reveal delay={0}><SectionEyebrow>Security &amp; control</SectionEyebrow></Reveal>
+            <Reveal delay={90}><H2>Designed so users <em>stay in control.</em></H2></Reveal>
+            <Reveal delay={170}>
+              <Sub>
+                Dexrl is designed as a non-custodial setup and wallet access. Users authorized settlement instructions, and wallet access remains controlled through secure authentication.
+              </Sub>
+            </Reveal>
           </div>
-          <SecPoints>
+          <SecPoints $inView={inView}>
             {points.map((point, idx) => {
               const Icon = point.icon;
               return (
                 <SecPoint key={idx}>
-                  <SecIcon>
-                    <Icon size={20} />
-                  </SecIcon>
+                  <SecIcon><Icon size={20} /></SecIcon>
                   <SecText>{point.text}</SecText>
                 </SecPoint>
               );

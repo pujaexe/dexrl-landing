@@ -1,6 +1,9 @@
 "use client";
 
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
+import { Reveal } from "./Reveal";
+import { useInView } from "../hooks/useInView";
 
 const StepsSection = styled.section``;
 
@@ -40,9 +43,7 @@ const H2 = styled.h2`
   margin: 0 0 16px;
   text-wrap: balance;
 
-  em {
-    font-style: italic;
-  }
+  em { font-style: italic; }
 `;
 
 const Sub = styled.p`
@@ -54,7 +55,7 @@ const Sub = styled.p`
   margin: 0;
 `;
 
-const StepsGrid = styled.div`
+const StepsGrid = styled.div<{ $inView: boolean }>`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
@@ -63,6 +64,26 @@ const StepsGrid = styled.div`
 
   @media (max-width: 820px) {
     grid-template-columns: 1fr;
+  }
+
+  & > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity  0.68s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.68s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  ${(p) =>
+    p.$inView &&
+    css`
+      & > *:nth-child(1) { opacity: 1; transform: none; transition-delay:   0ms; }
+      & > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 130ms; }
+      & > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 260ms; }
+    `}
+
+  @media (prefers-reduced-motion: reduce) {
+    & > * { transition: opacity 0.3s ease; transform: none !important; }
   }
 `;
 
@@ -73,17 +94,12 @@ const Step = styled.div`
   flex-direction: column;
   gap: 12px;
 
-  &:last-child {
-    border-right: none;
-  }
+  &:last-child { border-right: none; }
 
   @media (max-width: 820px) {
     border-right: none;
     border-bottom: 1px solid var(--line);
-
-    &:last-child {
-      border-bottom: none;
-    }
+    &:last-child { border-bottom: none; }
   }
 `;
 
@@ -112,42 +128,29 @@ const StepP = styled.p`
 `;
 
 const steps = [
-  {
-    num: "01",
-    title: "One-click settlement",
-    description: "Select the settlement on digital asset you wish to create",
-  },
-  {
-    num: "02",
-    title: "Exact fills the route",
-    description: "Exact consolidates the entire through available routing infrastructure",
-  },
-  {
-    num: "03",
-    title: "Send directly to your wallet",
-    description: "The arrival node executes the settlement instantly at the route only by your wallet",
-  },
+  { num: "01", title: "One-click settlement",       description: "Select the settlement on digital asset you wish to create" },
+  { num: "02", title: "Exact fills the route",      description: "Exact consolidates the entire through available routing infrastructure" },
+  { num: "03", title: "Send directly to your wallet", description: "The arrival node executes the settlement instantly at the route only by your wallet" },
 ];
 
 export function Steps() {
+  const { ref, inView } = useInView();
   return (
-    <StepsSection id="how">
+    <StepsSection id="how" ref={ref as React.RefObject<HTMLElement>}>
       <Wrap>
         <StepsHead>
-          <SectionEyebrow>How it works</SectionEyebrow>
-          <H2>
-            Three steps. <em>That&apos;s it.</em>
-          </H2>
-          <Sub>
-            A guided settlement flow designed for financial teams and operations — not traders.
-          </Sub>
+          <Reveal delay={0}><SectionEyebrow>How it works</SectionEyebrow></Reveal>
+          <Reveal delay={90}><H2>Three steps. <em>That&apos;s it.</em></H2></Reveal>
+          <Reveal delay={170}>
+            <Sub>A guided settlement flow designed for financial teams and operations — not traders.</Sub>
+          </Reveal>
         </StepsHead>
-        <StepsGrid>
-          {steps.map((step) => (
-            <Step key={step.num}>
-              <StepNum>{step.num}</StepNum>
-              <StepH3>{step.title}</StepH3>
-              <StepP>{step.description}</StepP>
+        <StepsGrid $inView={inView}>
+          {steps.map((s) => (
+            <Step key={s.num}>
+              <StepNum>{s.num}</StepNum>
+              <StepH3>{s.title}</StepH3>
+              <StepP>{s.description}</StepP>
             </Step>
           ))}
         </StepsGrid>
