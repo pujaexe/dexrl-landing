@@ -104,6 +104,10 @@ const routes = [
   { from: "Dubai",     to: "Singapore"    },
 ];
 
+// Per-route timing so meteors feel organic, not in sync
+const METEOR_DUR   = [2.8, 3.3, 2.6, 3.7, 3.1, 4.2, 3.5];
+const METEOR_DELAY = [0,   0.9, 1.5, 0.3, 1.9, 0.1, 2.3];
+
 export function GlobeVisualization() {
   // Project pre-computed land [lat, lng] pairs → SVG coordinates
   const landDots = useMemo(() => {
@@ -146,13 +150,26 @@ export function GlobeVisualization() {
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
-          <filter id="routeGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
+          {/* Larger blur for the meteor outer glow */}
+          <filter id="meteorGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          {/* Invisible path definitions used by <animateMotion> for each route */}
+          {routeCoords.map((route, idx) => {
+            if (!route.from || !route.to) return null;
+            if (!visible(route.from.z) || !visible(route.to.z)) return null;
+            return (
+              <path
+                key={`rp-def-${idx}`}
+                id={`rp-${idx}`}
+                d={arcPath(route.from.px, route.from.py, route.to.px, route.to.py)}
+              />
+            );
+          })}
         </defs>
 
         {/* Dark ocean sphere */}
@@ -170,21 +187,76 @@ export function GlobeVisualization() {
           />
         ))}
 
-        {/* Settlement route arcs */}
-        <g filter="url(#routeGlow)">
+        {/* Meteor settlement routes */}
+        <g>
           {routeCoords.map((route, idx) => {
             if (!route.from || !route.to) return null;
             if (!visible(route.from.z) || !visible(route.to.z)) return null;
+            const d    = arcPath(route.from.px, route.from.py, route.to.px, route.to.py);
+            const dur  = `${METEOR_DUR[idx]   ?? 3}s`;
+            const begin = `${METEOR_DELAY[idx] ?? 0}s`;
+            const rpId = `rp-${idx}`;
             return (
-              <path
-                key={`route-${idx}`}
-                d={arcPath(route.from.px, route.from.py, route.to.px, route.to.py)}
-                fill="none"
-                stroke="oklch(82% 0.1 196)"
-                strokeWidth="1.2"
-                opacity="0.55"
-                strokeLinecap="round"
-              />
+              <g key={`route-${idx}`}>
+                {/* Faint dashed guide so the corridor is hinted */}
+                <path d={d} fill="none"
+                  stroke="oklch(72% 0.07 196)"
+                  strokeWidth="0.6"
+                  strokeDasharray="2 7"
+                  opacity="0.1"
+                />
+
+                {/* ── Outer glow tail (wide, blurry, teal) ── */}
+                {/* pathLength="100" normalises the path so dasharray values are percentages */}
+                {/* from=tailLen → dash starts just before path; to=-100 → dash exits at end  */}
+                <path d={d} fill="none"
+                  stroke="oklch(80% 0.14 196)"
+                  strokeWidth="5"
+                  pathLength="100"
+                  strokeDasharray="22 78"
+                  strokeLinecap="round"
+                  opacity="0.28"
+                  filter="url(#meteorGlow)"
+                >
+                  <animate attributeName="stroke-dashoffset"
+                    from="22" to="-100"
+                    dur={dur} begin={begin}
+                    repeatCount="indefinite"
+                    calcMode="linear"
+                  />
+                </path>
+
+                {/* ── Inner bright core tail (narrow, sharp, near-white) ── */}
+                <path d={d} fill="none"
+                  stroke="oklch(97% 0.04 196)"
+                  strokeWidth="1.4"
+                  pathLength="100"
+                  strokeDasharray="12 88"
+                  strokeLinecap="round"
+                  opacity="0.9"
+                >
+                  <animate attributeName="stroke-dashoffset"
+                    from="12" to="-100"
+                    dur={dur} begin={begin}
+                    repeatCount="indefinite"
+                    calcMode="linear"
+                  />
+                </path>
+
+                {/* ── Meteor head: bright dot that rides the arc ── */}
+                <circle r="2.8" fill="white" filter="url(#cityGlow)">
+                  {/* Hide during the snap-back (teleport) between cycles */}
+                  <animate attributeName="opacity"
+                    values="0;1;1;0"
+                    keyTimes="0;0.04;0.96;1"
+                    dur={dur} begin={begin}
+                    repeatCount="indefinite"
+                  />
+                  <animateMotion dur={dur} begin={begin} repeatCount="indefinite" rotate="auto">
+                    <mpath href={`#${rpId}`} />
+                  </animateMotion>
+                </circle>
+              </g>
             );
           })}
         </g>
