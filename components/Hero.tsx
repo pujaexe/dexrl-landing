@@ -29,7 +29,7 @@ const FadeUp = styled.div<{ $delay?: number }>`
 
 /* ── Hero: organic mesh gradient + film grain ── */
 const HeroSection = styled.section`
-  padding: 80px 0 96px;
+  padding: 152px 0 96px;  /* 80px content + 72px navbar height */
   position: relative;
   overflow: hidden;
   isolation: isolate;

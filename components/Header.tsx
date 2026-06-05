@@ -8,13 +8,16 @@ import { useState, useEffect } from "react";
    - Scrolled:      frosted glass + bottom border
    ─────────────────────────────────────────────── */
 const HeaderWrapper = styled.header<{ $scrolled: boolean }>`
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 50;
   transition:
-    background    0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    background      0.35s cubic-bezier(0.4, 0, 0.2, 1),
     backdrop-filter 0.35s ease,
-    border-color  0.35s ease;
+    border-color    0.35s ease;
 
   background: ${(p) =>
     p.$scrolled
