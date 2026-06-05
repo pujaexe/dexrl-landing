@@ -151,13 +151,13 @@ export function Fiat() {
       <Wrap>
         <FiatGrid>
           <div>
-            <Reveal delay={0}><SectionEyebrow>Regulated partner network</SectionEyebrow></Reveal>
+            <Reveal delay={0}><SectionEyebrow>Licensed partners</SectionEyebrow></Reveal>
             <Reveal delay={90}>
-              <H2>Compliance is <em>handled by experts.</em></H2>
+              <H2>We don&apos;t handle fiat. <em>They do.</em></H2>
             </Reveal>
             <Reveal delay={170}>
               <Sub>
-                dexRL operates as a technology routing protocol. All fiat entry and exit points are handled exclusively by our regulated partner network — each holding the relevant licences in their jurisdiction.
+                IDRX converts Indonesian rupiah. Monerium credits UK bank accounts. StraitsX handles Singapore. Each holds the licence for their market. dexRL connects them.
               </Sub>
             </Reveal>
           </div>
@@ -173,7 +173,7 @@ export function Fiat() {
             </PartnersGrid>
             <Reveal delay={400}>
               <ComplianceNote>
-                All fiat on/off-ramps are fully processed by licensed Electronic Money Institutions (EMIs) and regulated stablecoin issuers. dexRL operates strictly as a secure technology routing protocol — not a money services business.
+                dexRL is a routing layer, not a money transmitter. IDRX, Monerium, and StraitsX hold the regulated licences and handle KYC, AML, and fiat compliance in their markets.
               </ComplianceNote>
             </Reveal>
           </div>

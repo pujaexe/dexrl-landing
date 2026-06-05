@@ -121,9 +121,9 @@ const CardP = styled.p`
 `;
 
 const benefits = [
-  { num: "01", title: "Transfers in minutes",          description: "Move funds internationally through a clean, guided flow. No trading screens, no Web3 knowledge — just enter an amount and confirm." },
-  { num: "02", title: "Enterprise-grade compliance",   description: "Operate confidently through our licensed partner network. KYC, AML, and fiat compliance are fully handled by regulated institutions at each end of the pipeline." },
-  { num: "03", title: "True self-custody",             description: "dexRL never holds your funds. Every transaction executes directly through your business's secure, isolated digital wallet — mathematically provable, not a policy claim." },
+  { num: "01", title: "Ten minutes, not three days",   description: "Enter an amount and a recipient's account. Confirm the fee. Done. No account setup, no crypto wallet, no explaining to your finance team." },
+  { num: "02", title: "Not your compliance problem",   description: "IDRX handles KYC for Indonesian senders. Monerium handles UK payouts. StraitsX handles Singapore. dexRL routes between them — that's it." },
+  { num: "03", title: "Your money, your wallet",       description: "Your wallet is created at sign-in and only you can unlock it. dexRL processes the route. We can't touch the funds — that's not a promise, it's how the hardware works." },
 ];
 
 export function Benefits() {

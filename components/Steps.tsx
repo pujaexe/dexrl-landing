@@ -239,20 +239,20 @@ const steps = [
   {
     num: "01",
     icon: SendHorizontal,
-    title: "Initiate the transfer",
-    description: "Enter the amount and your recipient's destination. dexRL displays the total fee and exact amount received — before you confirm.",
+    title: "Enter amount and destination",
+    description: "Tell dexRL where the money's going and how much. We show you the fee and exactly what arrives — before you confirm anything.",
   },
   {
     num: "02",
     icon: Zap,
-    title: "Route optimisation",
-    description: "dexRL's router automatically consolidates liquidity across available infrastructure to ensure the best conversion rates.",
+    title: "We route it",
+    description: "Our router finds the cheapest path through on-chain liquidity and executes automatically. You just confirm the price.",
   },
   {
     num: "03",
     icon: ShieldCheck,
-    title: "Funds arrive directly",
-    description: "Settlement executes instantly into a secure wallet held exclusively by your business. No intermediary ever touches your funds.",
+    title: "It lands in their account",
+    description: "The recipient gets local currency in their bank. No wallet on their end, no stablecoin to convert, no explaining what just happened.",
   },
 ];
 
@@ -283,7 +283,7 @@ export function Steps() {
           <Reveal delay={0}><SectionEyebrow>How it works</SectionEyebrow></Reveal>
           <Reveal delay={90}><H2>Three steps. <em>That&apos;s it.</em></H2></Reveal>
           <Reveal delay={170}>
-            <Sub>A guided settlement flow designed for financial teams and operations — not traders.</Sub>
+            <Sub>No crypto knowledge needed. Works like a bank transfer — just faster and cheaper.</Sub>
           </Reveal>
         </StepsHead>
 

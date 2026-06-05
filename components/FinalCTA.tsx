@@ -97,9 +97,9 @@ export function FinalCTA() {
   return (
     <FinalCTASection>
       <Wrap>
-        <Reveal delay={0}   y={32}><H2>Start with a simple <em>settlement flow.</em></H2></Reveal>
+        <Reveal delay={0}   y={32}><H2>Try a real route. <em>See the fee first.</em></H2></Reveal>
         <Reveal delay={100} y={24}>
-          <Sub>Use dexRL to move funds internationally in minutes — self-custodial, compliant, and built for modern businesses.</Sub>
+          <Sub>Pick a corridor, enter an amount, see exactly what arrives and what it costs. No commitment until you hit send.</Sub>
         </Reveal>
         <Reveal delay={200} y={20}>
           <CTAButtons>

@@ -129,9 +129,9 @@ const SecDisclaim = styled.div`
 `;
 
 const points = [
-  { icon: Lock,         text: "Dedicated settlement wallet for each user" },
-  { icon: Key,          text: "Passkey or email-based access" },
-  { icon: CheckCircle2, text: "User-authorized settlement instructions" },
+  { icon: Lock,         text: "One wallet per business, always yours" },
+  { icon: Key,          text: "Passkey or email login — no seed phrases" },
+  { icon: CheckCircle2, text: "You approve before anything moves" },
 ];
 
 export function Security() {
@@ -145,7 +145,7 @@ export function Security() {
             <Reveal delay={90}><H2>Designed so users <em>stay in control.</em></H2></Reveal>
             <Reveal delay={170}>
               <Sub>
-                dexRL is built on a non-custodial architecture. Every transaction is executed through a secure wallet owned exclusively by your business — dexRL never holds, controls, or can access your funds at any point.
+                Your wallet is created at login and lives in a hardware enclave — not our servers. We see the route. We can&apos;t see the money.
               </Sub>
             </Reveal>
           </div>
@@ -160,7 +160,7 @@ export function Security() {
               );
             })}
             <SecDisclaim>
-              Your funds are never held on a centralised exchange, trading venue, or third-party custodian platform. dexRL operates strictly as a secure technology routing protocol — you maintain 100% control at all times.
+              dexRL doesn&apos;t hold funds. Ever. The money moves from your wallet to the recipient — you authorize it, we route it. No exchange, no custody, no counterparty risk.
             </SecDisclaim>
           </SecPoints>
         </SecGrid>

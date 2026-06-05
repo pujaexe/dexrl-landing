@@ -453,7 +453,7 @@ export function Hero() {
             </FadeUp>
             <FadeUp $delay={180}>
               <Lede>
-                Move funds internationally in under 10 minutes at a fraction of traditional bank fees — totally self-custodial, operating invisibly on stablecoin rails. No trading screens. No Web3 knowledge required.
+                Send money across borders in under 10 minutes. Our fee is 0.6–1.1% — banks charge 4–6%. Your funds move on stablecoin rails. You won&apos;t notice.
               </Lede>
             </FadeUp>
             <FadeUp $delay={260}>
@@ -464,9 +464,9 @@ export function Hero() {
             </FadeUp>
             <FadeUp $delay={340}>
               <HeroTrust>
-                <span>Non-custodial by design</span>
-                <span>Stablecoin rails across Asia</span>
-                <span>Settles in minutes</span>
+                <span>You own your wallet</span>
+                <span>Indonesia · Singapore · UK</span>
+                <span>&lt; 10 min end-to-end</span>
               </HeroTrust>
             </FadeUp>
           </HeroContent>
