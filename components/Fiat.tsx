@@ -6,7 +6,7 @@ import { Reveal } from "./Reveal";
 import { useInView } from "../hooks/useInView";
 
 const FiatSection = styled.section`
-  background: oklch(96% 0.008 85);
+  background: #E6EDEA;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 `;

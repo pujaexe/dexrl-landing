@@ -106,7 +106,7 @@ const SecIcon = styled.div`
   flex: 0 0 36px;
   border-radius: 10px;
   background: var(--accent-soft);
-  color: var(--accent);
+  color: var(--on-accent);
   display: grid;
   place-items: center;
 `;

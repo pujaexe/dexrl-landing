@@ -22,7 +22,7 @@ const GlobeStage = styled.div`
   border-radius: 28px;
   overflow: hidden;
   position: relative;
-  color: oklch(95% 0.005 200);
+  color: #ECF0EF;
   padding: 64px;
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -47,7 +47,7 @@ const GlobeCopy = styled.div`
 
 const SectionEyebrow = styled.div`
   font-size: 13px;
-  color: oklch(60% 0.012 200);
+  color: rgba(203, 242, 61, 0.7);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 0;
@@ -61,19 +61,19 @@ const H2 = styled.h2`
   line-height: 1.05;
   letter-spacing: -0.022em;
   font-weight: 400;
-  color: oklch(96% 0.005 200);
+  color: #ECF0EF;
   margin: 0;
   text-wrap: balance;
 
   em {
     font-style: italic;
-    color: oklch(78% 0.05 200);
+    color: #CBF23D;
   }
 `;
 
 const Sub = styled.p`
   font-size: 18px;
-  color: oklch(72% 0.012 200);
+  color: rgba(236, 240, 239, 0.72);
   max-width: 60ch;
   line-height: 1.55;
   text-wrap: pretty;
@@ -85,12 +85,12 @@ const GlobeMeta = styled.div`
   gap: 28px;
   margin-top: 8px;
   font-size: 13px;
-  color: oklch(60% 0.012 200);
+  color: rgba(236, 240, 239, 0.55);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 
   b {
-    color: oklch(86% 0.025 200);
+    color: #CBF23D;
     font-weight: 500;
   }
 `;
@@ -98,10 +98,10 @@ const GlobeMeta = styled.div`
 const GlobeVisual = styled.div`
   position: relative;
   min-height: 620px;
-  background: radial-gradient(circle at 40% 50%, oklch(22% 0.015 220), oklch(12% 0.01 220));
+  background: radial-gradient(circle at 40% 50%, #0B2419, #040E09);
   border-radius: 20px;
   overflow: hidden;
-  color: oklch(95% 0.005 200);
+  color: #ECF0EF;
 
   @media (max-width: 980px) {
     min-height: 480px;

@@ -33,28 +33,40 @@
 }
 
 :root {
-  --bg: oklch(98% 0.004 220);
-  --bg-elev: oklch(99.5% 0.002 220);
-  --bg-deep: oklch(18% 0.012 220);
-  --ink: oklch(20% 0.01 60);
-  --ink-soft: oklch(38% 0.012 60);
-  --ink-mute: oklch(55% 0.012 60);
-  --line: oklch(91% 0.006 220);
-  --line-soft: oklch(94% 0.004 220);
-  --accent: oklch(42% 0.06 200);
-  --accent-soft: oklch(94% 0.018 200);
-  --on-accent: oklch(98% 0.005 200);
+  /* ── Brand Palette: Teal & Lime — Dexrl Design System v1.0 ── */
 
+  /* Surfaces */
+  --bg:        #ECF0EF;   /* Light Neutral  — page background         */
+  --bg-elev:   #FFFFFF;   /* White surface  — cards, inputs, swap box  */
+  --bg-deep:   #002116;   /* Deep Forest    — dark sections, globe      */
+
+  /* Text */
+  --ink:       #003E2C;   /* Primary Teal   — headings, labels, buttons */
+  --ink-soft:  #2D5C47;   /* ~65% teal      — body copy, subtext        */
+  --ink-mute:  #6A9080;   /* ~35% teal      — eyebrows, metadata        */
+
+  /* Borders — tonal, no harsh contrast */
+  --line:      #C2CFCB;   /* teal-tinted divider                        */
+  --line-soft: #D8E3DF;   /* very subtle separator                      */
+
+  /* Accent: Soft Lime */
+  --accent:      #CBF23D;  /* Soft Lime — CTA, swap action, badges       */
+  --accent-soft: #E4F1C2;  /* 25% lime  — icon container backgrounds     */
+  --on-accent:   #003E2C;  /* text/icon on lime surfaces                 */
+
+  /* Typography */
   --serif: "Instrument Serif", Georgia, serif;
-  --sans: "Geist", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --sans:  "Geist", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --mono:  ui-monospace, "SF Mono", Menlo, monospace;
 
-  --radius-sm: 10px;
-  --radius: 14px;
-  --radius-lg: 20px;
+  /* Radii — PDF spec: 16px (lg), 8px (base), pill for buttons */
+  --radius-sm: 8px;
+  --radius:    14px;
+  --radius-lg: 16px;
 
-  --shadow-1: 0 1px 0 rgba(20, 18, 14, 0.04), 0 1px 2px rgba(20, 18, 14, 0.03);
-  --shadow-2: 0 1px 0 rgba(20, 18, 14, 0.04), 0 10px 30px -12px rgba(20, 18, 14, 0.10);
+  /* Shadows — flat & institutional, tinted with Primary Teal */
+  --shadow-1: 0 1px 3px rgba(0, 62, 44, 0.06), 0 1px 2px rgba(0, 62, 44, 0.04);
+  --shadow-2: 0 4px 24px rgba(0, 62, 44, 0.08), 0 1px 4px rgba(0, 62, 44, 0.04);
 }
 
 * {
@@ -98,42 +110,45 @@ button {
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 30px;
 }
 
 @media (max-width: 720px) {
   .wrap {
-    padding: 0 20px;
+    padding: 0 15px;
   }
 }
 
+/* Section stack — PDF spec: 100px desktop, 40px mobile */
 section {
-  padding: 110px 0;
+  padding: 100px 0;
 }
 
 @media (max-width: 820px) {
   section {
-    padding: 72px 0;
+    padding: 60px 0;
   }
 }
 
+/* Live-dot pulse — Soft Lime (#CBF23D = rgb 203,242,61) */
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 0 0 4px oklch(62% 0.12 145 / 0.18);
+    box-shadow: 0 0 0 4px rgba(203, 242, 61, 0.28);
   }
   50% {
-    box-shadow: 0 0 0 8px oklch(62% 0.12 145 / 0.04);
+    box-shadow: 0 0 0 8px rgba(203, 242, 61, 0.06);
   }
 }
 
+/* Globe city-pin glow — Soft Lime */
 @keyframes globepin {
   0%, 100% {
-    box-shadow: 0 0 0 5px rgba(184, 216, 226, 0.30),
-      0 0 18px rgba(184, 216, 226, 0.55);
+    box-shadow: 0 0 0 5px  rgba(203, 242, 61, 0.32),
+                0 0 18px   rgba(203, 242, 61, 0.55);
   }
   50% {
-    box-shadow: 0 0 0 14px rgba(184, 216, 226, 0.05),
-      0 0 24px rgba(184, 216, 226, 0.35);
+    box-shadow: 0 0 0 14px rgba(203, 242, 61, 0.06),
+                0 0 24px   rgba(203, 242, 61, 0.35);
   }
 }
 
@@ -144,6 +159,6 @@ section {
 }
 
 ::selection {
-  background: oklch(82% 0.05 200);
-  color: var(--ink);
+  background: var(--accent);
+  color: var(--on-accent);
 }

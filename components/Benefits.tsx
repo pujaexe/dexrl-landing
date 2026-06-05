@@ -45,7 +45,7 @@ const H2 = styled.h2`
 
   em {
     font-style: italic;
-    color: oklch(35% 0.04 200);
+    color: var(--ink);
   }
 `;
 
@@ -91,7 +91,7 @@ const BCard = styled.div`
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    border-color: oklch(82% 0.012 75);
+    border-color: var(--accent);
     box-shadow: var(--shadow-2);
   }
 `;

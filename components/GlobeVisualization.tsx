@@ -119,7 +119,7 @@ export function GlobeVisualization() {
         cx: parseFloat(p.x.toFixed(1)),
         cy: parseFloat(p.y.toFixed(1)),
         r:  parseFloat((1.1 + depth * 0.8).toFixed(2)),
-        op: parseFloat((0.22 + depth * 0.48).toFixed(2)),
+        op: parseFloat((0.15 + depth * 0.38).toFixed(2)),
       };
     });
   }, []);
@@ -140,8 +140,8 @@ export function GlobeVisualization() {
       <SVG viewBox="-240 -240 480 480" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="globeBg" cx="50%" cy="50%">
-            <stop offset="0%"   stopColor="oklch(13% 0.02 218)" stopOpacity="1" />
-            <stop offset="100%" stopColor="oklch(6%  0.01 218)"  stopOpacity="1" />
+            <stop offset="0%"   stopColor="#0B2419" stopOpacity="1" />
+            <stop offset="100%" stopColor="#030D07" stopOpacity="1" />
           </radialGradient>
           <filter id="cityGlow" x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur stdDeviation="4" result="blur" />
@@ -182,7 +182,7 @@ export function GlobeVisualization() {
             cx={d.cx}
             cy={d.cy}
             r={d.r}
-            fill="oklch(72% 0.07 196)"
+            fill="#CBF23D"
             opacity={d.op}
           />
         ))}
@@ -200,7 +200,7 @@ export function GlobeVisualization() {
               <g key={`route-${idx}`}>
                 {/* Faint dashed guide so the corridor is hinted */}
                 <path d={d} fill="none"
-                  stroke="oklch(72% 0.07 196)"
+                  stroke="#CBF23D"
                   strokeWidth="0.6"
                   strokeDasharray="2 7"
                   opacity="0.1"
@@ -210,7 +210,7 @@ export function GlobeVisualization() {
                 {/* pathLength="100" normalises the path so dasharray values are percentages */}
                 {/* from=tailLen → dash starts just before path; to=-100 → dash exits at end  */}
                 <path d={d} fill="none"
-                  stroke="oklch(80% 0.14 196)"
+                  stroke="#CBF23D"
                   strokeWidth="5"
                   pathLength="100"
                   strokeDasharray="22 78"
@@ -228,7 +228,7 @@ export function GlobeVisualization() {
 
                 {/* ── Inner bright core tail (narrow, sharp, near-white) ── */}
                 <path d={d} fill="none"
-                  stroke="oklch(97% 0.04 196)"
+                  stroke="#F0FCAD"
                   strokeWidth="1.4"
                   pathLength="100"
                   strokeDasharray="12 88"
@@ -269,10 +269,10 @@ export function GlobeVisualization() {
             const delay = parseFloat((idx * 0.32).toFixed(2));
             return (
               <g key={city.name}>
-                <GlobeHalo cx={city.px} cy={city.py} r={r + 2} fill="oklch(80% 0.1 196)" $delay={delay} />
+                <GlobeHalo cx={city.px} cy={city.py} r={r + 2} fill="#CBF23D" $delay={delay} />
                 <GlobeDot
                   cx={city.px} cy={city.py} r={r}
-                  fill={city.primary ? "white" : "oklch(80% 0.1 196)"}
+                  fill={city.primary ? "white" : "#CBF23D"}
                   $delay={delay}
                 />
                 <text

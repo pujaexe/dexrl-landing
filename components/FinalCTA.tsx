@@ -80,12 +80,13 @@ const Button = styled.button<{ variant?: "primary" | "ghost" }>`
     }
   `
       : `
-    background: var(--ink);
-    color: var(--bg);
+    background: var(--accent);
+    color: var(--on-accent);
+    font-weight: 600;
     box-shadow: var(--shadow-1);
 
     &:hover {
-      background: oklch(28% 0.012 220);
+      background: #b8d934;
       transform: translateY(-1px);
       box-shadow: var(--shadow-2);
     }

@@ -75,7 +75,7 @@ const H1 = styled.h1`
 
   em {
     font-style: italic;
-    color: oklch(35% 0.04 200);
+    color: var(--ink);
   }
 `;
 
@@ -123,12 +123,12 @@ const Button = styled.button<{ variant?: "primary" | "ghost" }>`
     }
   `
       : `
-    background: var(--ink);
-    color: var(--bg);
+    background: var(--accent);
+    color: var(--on-accent);
     box-shadow: var(--shadow-1);
 
     &:hover {
-      background: oklch(28% 0.012 220);
+      background: #b8d934;
       transform: translateY(-1px);
       box-shadow: var(--shadow-2);
     }
@@ -154,8 +154,8 @@ const HeroTrust = styled.div`
 const SwapBox = styled.div`
   background: var(--bg-elev);
   border: 1px solid var(--line);
-  border-radius: 24px;
-  padding: 22px;
+  border-radius: 20px;
+  padding: 24px;
   box-shadow: var(--shadow-2);
   position: relative;
 `;
@@ -190,8 +190,8 @@ const LiveBadge = styled.div`
     width: 7px;
     height: 7px;
     border-radius: 999px;
-    background: oklch(62% 0.12 145);
-    box-shadow: 0 0 0 4px oklch(62% 0.12 145 / 0.18);
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(203, 242, 61, 0.22);
     animation: pulse 2s ease-in-out infinite;
   }
 `;
@@ -345,17 +345,18 @@ const SwapCTA = styled.button`
   width: 100%;
   margin-top: 12px;
   padding: 16px;
-  border-radius: 14px;
-  background: var(--ink);
-  color: var(--bg);
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
   border: none;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: -0.005em;
   transition: background 0.2s ease, transform 0.15s ease;
   cursor: pointer;
 
   &:hover {
-    background: oklch(28% 0.012 220);
+    background: #b8d934;
     transform: translateY(-1px);
   }
 `;
@@ -405,7 +406,7 @@ export function Hero() {
               <SwapLabel>You send</SwapLabel>
               <SwapAmount>125,000.00</SwapAmount>
               <TokenBadge>
-                <TokenFlag $bgColor="oklch(42% 0.06 200)">₹</TokenFlag>
+                <TokenFlag $bgColor="var(--ink)">₹</TokenFlag>
                 IDR Stablecoin
               </TokenBadge>
             </SwapField>
@@ -418,7 +419,7 @@ export function Hero() {
               <SwapLabel>Recipient receives</SwapLabel>
               <SwapAmount>7,812.50</SwapAmount>
               <TokenBadge>
-                <TokenFlag $bgColor="oklch(45% 0.08 210)">$</TokenFlag>
+                <TokenFlag $bgColor="var(--bg-deep)">$</TokenFlag>
                 USDC
               </TokenBadge>
             </SwapField>
