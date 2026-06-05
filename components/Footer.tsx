@@ -1,6 +1,7 @@
 "use client";
 
 import styled from "styled-components";
+import { DexRLLogo } from "./DexRLLogo";
 
 const FooterElement = styled.footer`
   border-top: 1px solid var(--line);
@@ -14,10 +15,7 @@ const Wrap = styled.div`
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 32px;
-
-  @media (max-width: 720px) {
-    padding: 0 20px;
-  }
+  @media (max-width: 720px) { padding: 0 20px; }
 `;
 
 const FooterInner = styled.div`
@@ -28,30 +26,15 @@ const FooterInner = styled.div`
   flex-wrap: wrap;
 `;
 
-const Brand = styled.div`
+/* Logo in footer — always dark/color version on light background */
+const FooterLogo = styled.a`
   display: flex;
   align-items: center;
-  gap: 10px;
-`;
-
-const BrandMark = styled.div`
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  background: var(--ink);
-  display: grid;
-  place-items: center;
-  color: var(--bg);
-  font-family: var(--serif);
-  font-size: 14px;
-  font-weight: 600;
-`;
-
-const BrandWord = styled.div`
-  font-family: var(--serif);
-  font-size: 16px;
-  letter-spacing: -0.02em;
   color: var(--ink);
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+  &:hover { opacity: 1; }
 `;
 
 const Copyright = styled.div`
@@ -64,11 +47,10 @@ export function Footer() {
     <FooterElement>
       <Wrap>
         <FooterInner>
-          <Brand>
-            <BrandMark>D</BrandMark>
-            <BrandWord>Dexrl</BrandWord>
-          </Brand>
-          <Copyright>© 2024 Dexrl Inc.</Copyright>
+          <FooterLogo href="/" aria-label="dexRL home">
+            <DexRLLogo style={{ height: "20px" }} />
+          </FooterLogo>
+          <Copyright>© 2026 dexRL Inc. All rights reserved.</Copyright>
         </FooterInner>
       </Wrap>
     </FooterElement>

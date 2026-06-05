@@ -3,8 +3,8 @@ import "./globals.css";
 import { StyledComponentsRegistry } from "@/lib/registry";
 
 export const metadata: Metadata = {
-  title: "Dexrl — Global crypto settlement, made simple",
-  description: "Global crypto settlement platform, made simple",
+  title: "dexRL — Instant cross-border payments. Zero Web3 complexity.",
+  description: "dexRL enables instant cross-border stablecoin payments in under 10 minutes at a fraction of traditional bank fees. Self-custodial, non-custodial, built for modern businesses.",
   icons: {
     icon: "/favicon.ico",
   },

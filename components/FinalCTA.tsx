@@ -99,7 +99,7 @@ export function FinalCTA() {
       <Wrap>
         <Reveal delay={0}   y={32}><H2>Start with a simple <em>settlement flow.</em></H2></Reveal>
         <Reveal delay={100} y={24}>
-          <Sub>Use Dexrl to move between stablecoins and digital assets through a guided swap experience.</Sub>
+          <Sub>Use dexRL to move funds internationally in minutes — self-custodial, compliant, and built for modern businesses.</Sub>
         </Reveal>
         <Reveal delay={200} y={20}>
           <CTAButtons>
