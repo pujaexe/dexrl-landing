@@ -449,13 +449,11 @@ export function Hero() {
           <HeroContent>
             <FadeUp $delay={0}><Eyebrow>FOR MODERN BUSINESSES</Eyebrow></FadeUp>
             <FadeUp $delay={90}>
-              <H1>Global crypto settlement, <em>made simple.</em></H1>
+              <H1>Instant cross-border payments. <em>Zero Web3 complexity.</em></H1>
             </FadeUp>
             <FadeUp $delay={180}>
               <Lede>
-                Dexrl helps businesses move between stablecoins and digital assets
-                through a guided swap experience. No trading screens. No Web3 confusion.
-                Just simple settlement flows for modern businesses.
+                Move funds internationally in under 10 minutes at a fraction of traditional bank fees — totally self-custodial, operating invisibly on stablecoin rails. No trading screens. No Web3 knowledge required.
               </Lede>
             </FadeUp>
             <FadeUp $delay={260}>
@@ -516,7 +514,7 @@ export function Hero() {
                       <TokenNameRow>
                         USDT <ChevronDown size={11} strokeWidth={2.5} />
                       </TokenNameRow>
-                      <TokenNetLine>On Polygon</TokenNetLine>
+                      <TokenNetLine>Converts to GBP, SGD &amp; more</TokenNetLine>
                     </TokenInfo>
                   </TokenBox>
                 </TokenColWrap>

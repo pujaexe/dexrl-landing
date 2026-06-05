@@ -121,7 +121,7 @@ export function Globe() {
               </Reveal>
               <Reveal delay={240}>
                 <Sub>
-                  Dexrl opens direct stablecoin settlement flows between countries, enabling from Indonesia and supporting similar flows.
+                  dexRL enables direct stablecoin settlement corridors across Asia — starting with Indonesia to Singapore, with the UK and beyond on the roadmap.
                 </Sub>
               </Reveal>
               <Reveal delay={320}>

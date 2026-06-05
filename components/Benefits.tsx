@@ -121,9 +121,9 @@ const CardP = styled.p`
 `;
 
 const benefits = [
-  { num: "01", title: "Simple swaps",          description: "Move between stablecoins and digital assets through a clean, guided flow" },
-  { num: "02", title: "Business-ready",         description: "Use it through a licensed swap arrangement, embed custom interface, or operate integration" },
-  { num: "03", title: "Users stay in control",  description: "Each user withdraws settlement instructions, stay connected through secure wallet access" },
+  { num: "01", title: "Transfers in minutes",          description: "Move funds internationally through a clean, guided flow. No trading screens, no Web3 knowledge — just enter an amount and confirm." },
+  { num: "02", title: "Enterprise-grade compliance",   description: "Operate confidently through our licensed partner network. KYC, AML, and fiat compliance are fully handled by regulated institutions at each end of the pipeline." },
+  { num: "03", title: "True self-custody",             description: "dexRL never holds your funds. Every transaction executes directly through your business's secure, isolated digital wallet — mathematically provable, not a policy claim." },
 ];
 
 export function Benefits() {

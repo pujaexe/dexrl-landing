@@ -128,9 +128,9 @@ const StepP = styled.p`
 `;
 
 const steps = [
-  { num: "01", title: "One-click settlement",       description: "Select the settlement on digital asset you wish to create" },
-  { num: "02", title: "Exact fills the route",      description: "Exact consolidates the entire through available routing infrastructure" },
-  { num: "03", title: "Send directly to your wallet", description: "The arrival node executes the settlement instantly at the route only by your wallet" },
+  { num: "01", title: "Initiate the transfer",       description: "Enter the amount and your recipient's destination. dexRL displays the total fee and exact amount received — before you confirm." },
+  { num: "02", title: "Route optimisation",          description: "dexRL's router automatically consolidates liquidity across available infrastructure to ensure the best conversion rates." },
+  { num: "03", title: "Funds arrive directly",       description: "Settlement executes instantly into a secure wallet held exclusively by your business. No intermediary ever touches your funds." },
 ];
 
 export function Steps() {

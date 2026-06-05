@@ -124,11 +124,24 @@ const PartnerRegion = styled.div`
   margin-top: auto;
 `;
 
+const ComplianceNote = styled.div`
+  margin-top: 16px;
+  grid-column: 1 / -1;
+  padding: 14px 18px;
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+`;
+
 const partners = [
-  { role: "Partner provider",     name: "Binance fiat partner",       region: "Southeast Asia" },
-  { role: "Settlement provider",  name: "Crypto settlement hub",      region: "Asia Pacific"   },
-  { role: "License provider",     name: "Institutional liquidity call", region: "Singapore"    },
-  { role: "Currency provider",    name: "Local settlement bank",      region: "Indonesia"      },
+  { role: "IDR stablecoin issuer",   name: "IDRX",      region: "Indonesia — KYC & AML compliant" },
+  { role: "GBP delivery partner",    name: "Monerium",  region: "United Kingdom — FCA authorised" },
+  { role: "SGD delivery partner",    name: "StraitsX",  region: "Singapore — MAS licensed"        },
+  { role: "Wallet infrastructure",   name: "Privy",     region: "Global — hardware-vault TEE"     },
 ];
 
 export function Fiat() {
@@ -138,25 +151,32 @@ export function Fiat() {
       <Wrap>
         <FiatGrid>
           <div>
-            <Reveal delay={0}><SectionEyebrow>Fiat redemptions</SectionEyebrow></Reveal>
+            <Reveal delay={0}><SectionEyebrow>Regulated partner network</SectionEyebrow></Reveal>
             <Reveal delay={90}>
-              <H2>Fiat services, <em>when needed,</em> are handled by licensed providers.</H2>
+              <H2>Compliance is <em>handled by experts.</em></H2>
             </Reveal>
             <Reveal delay={170}>
               <Sub>
-                Dexrl supports stablecoin-based settlement flows. When fiat entry or exit is required, licensed fiat providers integrate into the settlement rails.
+                dexRL operates as a technology routing protocol. All fiat entry and exit points are handled exclusively by our regulated partner network — each holding the relevant licences in their jurisdiction.
               </Sub>
             </Reveal>
           </div>
-          <PartnersGrid $inView={inView}>
-            {partners.map((p, idx) => (
-              <Partner key={idx}>
-                <PartnerRole>{p.role}</PartnerRole>
-                <PartnerName>{p.name}</PartnerName>
-                <PartnerRegion>{p.region}</PartnerRegion>
-              </Partner>
-            ))}
-          </PartnersGrid>
+          <div>
+            <PartnersGrid $inView={inView}>
+              {partners.map((p, idx) => (
+                <Partner key={idx}>
+                  <PartnerRole>{p.role}</PartnerRole>
+                  <PartnerName>{p.name}</PartnerName>
+                  <PartnerRegion>{p.region}</PartnerRegion>
+                </Partner>
+              ))}
+            </PartnersGrid>
+            <Reveal delay={400}>
+              <ComplianceNote>
+                All fiat on/off-ramps are fully processed by licensed Electronic Money Institutions (EMIs) and regulated stablecoin issuers. dexRL operates strictly as a secure technology routing protocol — not a money services business.
+              </ComplianceNote>
+            </Reveal>
+          </div>
         </FiatGrid>
       </Wrap>
     </FiatSection>

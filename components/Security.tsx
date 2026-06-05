@@ -145,7 +145,7 @@ export function Security() {
             <Reveal delay={90}><H2>Designed so users <em>stay in control.</em></H2></Reveal>
             <Reveal delay={170}>
               <Sub>
-                Dexrl is designed as a non-custodial setup and wallet access. Users authorized settlement instructions, and wallet access remains controlled through secure authentication.
+                dexRL is built on a non-custodial architecture. Every transaction is executed through a secure wallet owned exclusively by your business — dexRL never holds, controls, or can access your funds at any point.
               </Sub>
             </Reveal>
           </div>
@@ -160,7 +160,7 @@ export function Security() {
               );
             })}
             <SecDisclaim>
-              Dexrl is held in a centralized exchange, wide-mode trading venue or decentralized custodian platform.
+              Your funds are never held on a centralised exchange, trading venue, or third-party custodian platform. dexRL operates strictly as a secure technology routing protocol — you maintain 100% control at all times.
             </SecDisclaim>
           </SecPoints>
         </SecGrid>
