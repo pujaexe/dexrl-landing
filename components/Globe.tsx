@@ -121,7 +121,7 @@ export function Globe() {
               </Reveal>
               <Reveal delay={240}>
                 <Sub>
-                  Direct stablecoin corridors between countries, starting with Southeast Asia. Every new corridor runs on the same infrastructure — more routes, same simplicity.
+                  Direct stablecoin corridors between countries, starting with Southeast Asia. Every new corridor runs on the same infrastructure. more routes, same simplicity.
                 </Sub>
               </Reveal>
               <Reveal delay={320}>

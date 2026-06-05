@@ -570,7 +570,7 @@ export function Hero() {
 
               {/* Microcopy: bridge the Web3 jargon gap for finance teams */}
               <WidgetNote>
-                USDT can be paid out directly to a bank account — GBP, SGD, and more — via our licensed delivery partners.
+                USDT can be paid out directly to a bank account GBP, SGD, and more via our licensed delivery partners.
               </WidgetNote>
 
               {/* CTA */}

@@ -129,8 +129,8 @@ const SecDisclaim = styled.div`
 `;
 
 const points = [
-  { icon: Lock,         text: "One wallet per business, always yours" },
-  { icon: Key,          text: "Passkey or email login — no seed phrases" },
+  { icon: Lock, text: "One wallet per business, always yours" },
+  { icon: Key, text: "Passkey or email login — no seed phrases" },
   { icon: CheckCircle2, text: "You approve before anything moves" },
 ];
 
@@ -145,7 +145,7 @@ export function Security() {
             <Reveal delay={90}><H2>Designed so users <em>stay in control.</em></H2></Reveal>
             <Reveal delay={170}>
               <Sub>
-                Your wallet is created at login and lives in a hardware enclave — not our servers. We see the route. We can&apos;t see the money.
+                Your wallet is created at login and lives in a hardware enclave not our servers. We see the route. We can&apos;t see the money.
               </Sub>
             </Reveal>
           </div>
@@ -160,7 +160,7 @@ export function Security() {
               );
             })}
             <SecDisclaim>
-              dexRL doesn&apos;t hold funds. Ever. The money moves from your wallet to the recipient — you authorize it, we route it. No exchange, no custody, no counterparty risk.
+              dexRL doesn&apos;t hold funds. Ever. The money moves from your wallet to the recipient. you authorize it, we route it. No exchange, no custody, no counterparty risk.
             </SecDisclaim>
           </SecPoints>
         </SecGrid>

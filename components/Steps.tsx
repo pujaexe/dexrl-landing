@@ -254,7 +254,7 @@ const steps = [
 export function Steps() {
   const { ref, inView } = useInView();
   const [active, setActive] = useState(0);
-  const [tick, setTick]     = useState(0);
+  const [tick, setTick] = useState(0);
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -276,7 +276,7 @@ export function Steps() {
           <Reveal delay={0}><SectionEyebrow>How it works</SectionEyebrow></Reveal>
           <Reveal delay={90}><H2>Four steps. <em>That&apos;s it.</em></H2></Reveal>
           <Reveal delay={170}>
-            <Sub>No crypto knowledge needed. Works like a bank transfer — just faster and cheaper.</Sub>
+            <Sub>No crypto knowledge needed. Works like a bank transfer just faster and cheaper.</Sub>
           </Reveal>
         </StepsHead>
 

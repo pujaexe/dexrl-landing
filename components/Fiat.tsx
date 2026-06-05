@@ -138,10 +138,10 @@ const ComplianceNote = styled.div`
 `;
 
 const partners = [
-  { role: "Onramp partner",        name: "Licensed stablecoin issuer",     region: "Indonesia"      },
-  { role: "Delivery partner",      name: "Regulated payment institution",  region: "United Kingdom" },
-  { role: "Delivery partner",      name: "Regulated payment institution",  region: "Singapore"      },
-  { role: "Wallet infrastructure", name: "Hardware-secured key vault",     region: "Global"         },
+  { role: "Onramp partner", name: "Licensed stablecoin issuer", region: "Indonesia" },
+  { role: "Delivery partner", name: "Regulated payment institution", region: "United Kingdom" },
+  { role: "Delivery partner", name: "Regulated payment institution", region: "Singapore" },
+  { role: "Wallet infrastructure", name: "Hardware-secured key vault", region: "Global" },
 ];
 
 export function Fiat() {
@@ -157,7 +157,7 @@ export function Fiat() {
             </Reveal>
             <Reveal delay={170}>
               <Sub>
-                We don&apos;t convert currencies ourselves. Licensed local partners do — each regulated in their market. dexRL connects them.
+                We don&apos;t convert currencies ourselves. Licensed local partners do. each regulated in their market. dexRL connects them.
               </Sub>
             </Reveal>
           </div>
