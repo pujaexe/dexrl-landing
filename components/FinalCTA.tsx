@@ -33,7 +33,7 @@ const H2 = styled.h2`
   margin: 0 0 18px;
   text-wrap: balance;
 
-  em { font-style: italic; }
+  em { font-style: italic; color: var(--accent); }
 `;
 
 const Sub = styled.p`
