@@ -45,7 +45,7 @@ const H2 = styled.h2`
 
   em {
     font-style: italic;
-    color: var(--accent);
+    color: var(--accent-em);
   }
 `;
 

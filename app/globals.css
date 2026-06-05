@@ -50,9 +50,11 @@
   --line-soft: #D8E3DF;   /* very subtle separator                      */
 
   /* Accent: Soft Lime */
-  --accent:      #CBF23D;  /* Soft Lime — CTA, swap action, badges       */
-  --accent-soft: #E4F1C2;  /* 25% lime  — icon container backgrounds     */
-  --on-accent:   #003E2C;  /* text/icon on lime surfaces                 */
+  --accent:      #CBF23D;  /* Soft Lime — CTA, buttons, active badges     */
+  --accent-soft: #E4F1C2;  /* 25% lime  — icon container backgrounds      */
+  --on-accent:   #003E2C;  /* text/icon on lime surfaces                  */
+  /* Lime darkened 60% toward Primary Teal — readable on light backgrounds */
+  --accent-em:   color-mix(in srgb, #CBF23D 40%, #003E2C 60%);
 
   /* Typography */
   --serif: "Instrument Serif", Georgia, serif;

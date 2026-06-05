@@ -54,7 +54,7 @@ const H2 = styled.h2`
   margin: 0 0 16px;
   text-wrap: balance;
 
-  em { font-style: italic; color: var(--accent); }
+  em { font-style: italic; color: var(--accent-em); }
 `;
 
 const Sub = styled.p`
