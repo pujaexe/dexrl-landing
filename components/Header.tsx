@@ -3,19 +3,31 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-const HeaderWrapper = styled.header`
+/* ── Header wrapper
+   - Default (top): fully transparent, no blur
+   - Scrolled:      frosted glass + bottom border
+   ─────────────────────────────────────────────── */
+const HeaderWrapper = styled.header<{ $scrolled: boolean }>`
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in oklab, var(--bg) 88%, transparent);
-  backdrop-filter: saturate(140%) blur(10px);
-  -webkit-backdrop-filter: saturate(140%) blur(10px);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition:
+    background    0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter 0.35s ease,
+    border-color  0.35s ease;
 
-  &.scrolled {
-    border-bottom-color: var(--line);
-  }
+  background: ${(p) =>
+    p.$scrolled
+      ? "color-mix(in oklab, var(--bg) 90%, transparent)"
+      : "transparent"};
+
+  backdrop-filter: ${(p) =>
+    p.$scrolled ? "saturate(160%) blur(14px)" : "none"};
+  -webkit-backdrop-filter: ${(p) =>
+    p.$scrolled ? "saturate(160%) blur(14px)" : "none"};
+
+  border-bottom: 1px solid ${(p) =>
+    p.$scrolled ? "var(--line)" : "transparent"};
 `;
 
 const Nav = styled.nav`
@@ -32,30 +44,34 @@ const Nav = styled.nav`
   }
 `;
 
+/* Brand mark: light on transparent, dark on scrolled */
+const BrandMark = styled.div<{ $scrolled: boolean }>`
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.35s ease, color 0.35s ease;
+
+  background: ${(p) => (p.$scrolled ? "var(--ink)" : "#ECF0EF")};
+  color:      ${(p) => (p.$scrolled ? "#ECF0EF"    : "var(--ink)")};
+`;
+
+const BrandWord = styled.div<{ $scrolled: boolean }>`
+  font-family: var(--serif);
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  transition: color 0.35s ease;
+  color: ${(p) => (p.$scrolled ? "var(--ink)" : "#ECF0EF")};
+`;
+
 const Brand = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-`;
-
-const BrandMark = styled.div`
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: var(--ink);
-  display: grid;
-  place-items: center;
-  color: var(--bg);
-  font-family: var(--serif);
-  font-size: 16px;
-  font-weight: 600;
-`;
-
-const BrandWord = styled.div`
-  font-family: var(--serif);
-  font-size: 24px;
-  letter-spacing: -0.02em;
-  color: var(--ink);
 `;
 
 const NavLinks = styled.div`
@@ -68,16 +84,17 @@ const NavLinks = styled.div`
   }
 `;
 
-const NavLink = styled.a`
+const NavLink = styled.a<{ $scrolled: boolean }>`
   font-size: 15px;
-  color: var(--ink-soft);
   padding: 8px 0;
-  position: relative;
-  transition: color 0.15s ease;
   cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+  color: ${(p) =>
+    p.$scrolled ? "var(--ink-soft)" : "rgba(236, 240, 239, 0.70)"};
 
   &:hover {
-    color: var(--ink);
+    color: ${(p) => (p.$scrolled ? "var(--ink)" : "#ECF0EF")};
   }
 
   @media (max-width: 820px) {
@@ -85,17 +102,26 @@ const NavLink = styled.a`
   }
 `;
 
-const CTAButton = styled.button`
-  color: var(--ink);
-  border: 1px solid var(--line);
+const CTAButton = styled.button<{ $scrolled: boolean }>`
   padding: 9px 16px;
   border-radius: 999px;
-  background: var(--bg-elev);
-  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
   font-size: 15px;
+  transition:
+    color         0.35s ease,
+    background    0.35s ease,
+    border-color  0.2s ease;
+
+  /* Transparent state → ghost white button */
+  color:      ${(p) => (p.$scrolled ? "var(--ink)"    : "#ECF0EF")};
+  background: ${(p) => (p.$scrolled ? "var(--bg-elev)": "transparent")};
+  border: 1px solid ${(p) =>
+    p.$scrolled ? "var(--line)" : "rgba(236, 240, 239, 0.35)"};
 
   &:hover {
-    border-color: var(--ink);
+    border-color: ${(p) =>
+      p.$scrolled ? "var(--ink)" : "rgba(236, 240, 239, 0.80)"};
+    background: ${(p) =>
+      p.$scrolled ? "var(--bg-elev)" : "rgba(255,255,255,0.08)"};
   }
 `;
 
@@ -103,25 +129,24 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll(); // set on mount in case page is already scrolled
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <HeaderWrapper className={scrolled ? "scrolled" : ""}>
+    <HeaderWrapper $scrolled={scrolled}>
       <Nav>
         <Brand>
-          <BrandMark>D</BrandMark>
-          <BrandWord>Dexrl</BrandWord>
+          <BrandMark $scrolled={scrolled}>D</BrandMark>
+          <BrandWord $scrolled={scrolled}>Dexrl</BrandWord>
         </Brand>
+
         <NavLinks>
-          <NavLink href="#how">How it works</NavLink>
-          <NavLink href="#security">Security</NavLink>
-          <CTAButton>Talk to our team</CTAButton>
+          <NavLink href="#how"      $scrolled={scrolled}>How it works</NavLink>
+          <NavLink href="#security" $scrolled={scrolled}>Security</NavLink>
+          <CTAButton $scrolled={scrolled}>Talk to our team</CTAButton>
         </NavLinks>
       </Nav>
     </HeaderWrapper>
