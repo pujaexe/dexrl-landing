@@ -2,9 +2,23 @@
 
 import styled, { keyframes } from "styled-components";
 
+/* ── Entrance animation ── */
 const fadeUp = keyframes`
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: none; }
+`;
+
+/* ── Film grain shift — steps(1) = jump-cut, not interpolated ── */
+const grainShift = keyframes`
+  0%   { transform: translate(0%,    0%); }
+  12%  { transform: translate(-4%,  -9%); }
+  24%  { transform: translate(-9%,   4%); }
+  36%  { transform: translate(3%,  -14%); }
+  48%  { transform: translate(-6%,  11%); }
+  60%  { transform: translate(10%,  -3%); }
+  72%  { transform: translate(-2%,   8%); }
+  84%  { transform: translate(7%,   -7%); }
+  100% { transform: translate(0%,    0%); }
 `;
 
 const FadeUp = styled.div<{ $delay?: number }>`
@@ -16,10 +30,57 @@ const FadeUp = styled.div<{ $delay?: number }>`
   }
 `;
 
+/* ─────────────────────────────────────────────────────
+   Hero section — organic mesh gradient + grain overlay
+   Brand palette: #003E2C  #CBF23D  #005840  #ECF0EF
+   ───────────────────────────────────────────────────── */
 const HeroSection = styled.section`
   padding: 80px 0 96px;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+
+  /* Organic multi-radial mesh gradient — inspired by brand gradient PDF */
+  background:
+    /* Soft lime bloom — left centre, the hero focal "glow" */
+    radial-gradient(ellipse 62% 68% at 14% 68%, rgba(203, 242, 61, 0.50) 0%, transparent 62%),
+    /* Light neutral touch — top-left corner, prevents hard edge */
+    radial-gradient(ellipse 48% 42% at -4% 4%,  rgba(236, 240, 239, 0.20) 0%, transparent 55%),
+    /* Secondary lime — lower centre for warmth */
+    radial-gradient(ellipse 38% 38% at 38% 96%, rgba(203, 242, 61, 0.22) 0%, transparent 55%),
+    /* Mid forest teal — top centre, bridges lime and dark */
+    radial-gradient(ellipse 58% 62% at 44% 2%,  rgba(0, 88, 64, 0.68) 0%, transparent 65%),
+    /* Deep forest — upper-right, frames swap box on dark */
+    radial-gradient(ellipse 62% 68% at 92% 28%, rgba(0, 33, 22, 0.92) 0%, transparent 65%),
+    /* Ground depth — bottom anchor */
+    radial-gradient(ellipse 50% 50% at 58% 100%, rgba(0, 62, 44, 0.58) 0%, transparent 62%),
+    /* Base: deep forest */
+    #001B0E;
+
+  /* ── Premium film grain overlay ──
+     Oversized to avoid edge artefacts when animated.
+     SVG feTurbulence → greyscale noise → overlay blend */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -55%;
+    width: 210%;
+    height: 210%;
+    /* Inline SVG noise texture (400×400 fractal noise, greyscale) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72 0.68' numOctaves='4' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    opacity: 0.055;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 0;
+    animation: ${grainShift} 0.65s steps(1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      animation: none;
+    }
+  }
 `;
 
 const Wrap = styled.div`
@@ -27,6 +88,8 @@ const Wrap = styled.div`
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 32px;
+  position: relative;
+  z-index: 1;   /* above grain layer */
 
   @media (max-width: 720px) {
     padding: 0 20px;
@@ -47,44 +110,46 @@ const HeroGrid = styled.div`
 
 const HeroContent = styled.div``;
 
+/* Eyebrow label — lime tint on dark background */
 const Eyebrow = styled.div`
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-size: 13px;
-  color: var(--ink-soft);
-  letter-spacing: 0.04em;
+  color: rgba(203, 242, 61, 0.72);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 18px;
 
   &::before {
     content: "•";
-    color: var(--accent);
+    color: #CBF23D;
   }
 `;
 
+/* H1 — light sage white; em clause in Soft Lime */
 const H1 = styled.h1`
   font-family: var(--serif);
   font-size: clamp(48px, 6.4vw, 84px);
   line-height: 1.02;
   letter-spacing: -0.025em;
   margin: 18px 0 24px;
-  color: var(--ink);
+  color: #ECF0EF;
   text-wrap: balance;
   font-weight: 400;
 
   em {
     font-style: italic;
-    color: var(--ink);
+    color: #CBF23D;
   }
 `;
 
 const Lede = styled.p`
   font-size: 19px;
-  color: var(--ink-soft);
+  color: rgba(236, 240, 239, 0.78);
   max-width: 52ch;
   text-wrap: pretty;
-  line-height: 1.55;
+  line-height: 1.58;
   margin: 0;
 `;
 
@@ -100,7 +165,7 @@ const Button = styled.button<{ variant?: "primary" | "ghost" }>`
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 16px 24px;
+  padding: 16px 26px;
   border-radius: 999px;
   font-size: 16px;
   font-weight: 500;
@@ -114,50 +179,71 @@ const Button = styled.button<{ variant?: "primary" | "ghost" }>`
     props.variant === "ghost"
       ? `
     background: transparent;
-    color: var(--ink);
-    border-color: var(--line);
+    color: rgba(236, 240, 239, 0.90);
+    border-color: rgba(255, 255, 255, 0.28);
 
     &:hover {
-      border-color: var(--ink);
-      background: var(--bg-elev);
+      border-color: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.07);
     }
   `
       : `
-    background: var(--accent);
-    color: var(--on-accent);
-    box-shadow: var(--shadow-1);
+    background: #CBF23D;
+    color: #003E2C;
+    font-weight: 600;
+    box-shadow: 0 0 28px rgba(203, 242, 61, 0.38);
 
     &:hover {
       background: #b8d934;
       transform: translateY(-1px);
-      box-shadow: var(--shadow-2);
+      box-shadow: 0 0 40px rgba(203, 242, 61, 0.52);
     }
   `}
 `;
 
+/* Trust bar — subtle on dark background */
 const HeroTrust = styled.div`
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 20px;
   margin-top: 40px;
-  color: var(--ink-mute);
+  color: rgba(236, 240, 239, 0.48);
   font-size: 13px;
   flex-wrap: wrap;
+  letter-spacing: 0.01em;
 
   span {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
+
+    &::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(203, 242, 61, 0.50);
+      flex-shrink: 0;
+    }
+
+    &:first-child::before { display: none; }
   }
 `;
 
+/* ── Swap box: white elevated card floats on the dark gradient ── */
 const SwapBox = styled.div`
-  background: var(--bg-elev);
-  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 20px;
   padding: 24px;
-  box-shadow: var(--shadow-2);
+  /* Deep green-tinted shadow so the card pops dramatically */
+  box-shadow:
+    0 0  0 1px rgba(0, 33, 22, 0.06),
+    0 8px 32px -8px rgba(0, 20, 10, 0.40),
+    0 32px 80px -16px rgba(0, 14, 7, 0.60);
   position: relative;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 `;
 
 const SwapHead = styled.div`
@@ -245,7 +331,7 @@ const TokenFlag = styled.div<{ $bgColor?: string }>`
   display: grid;
   place-items: center;
   background: ${(props) => props.$bgColor || "var(--accent)"};
-  color: var(--bg);
+  color: #ECF0EF;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -271,7 +357,7 @@ const SwapArrow = styled.button`
   place-items: center;
   color: var(--ink-soft);
   margin: -16px 0;
-  box-shadow: 0 4px 12px -4px rgba(20, 18, 14, 0.08);
+  box-shadow: 0 4px 12px -4px rgba(0, 62, 44, 0.10);
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 18px;
@@ -352,12 +438,14 @@ const SwapCTA = styled.button`
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.005em;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  box-shadow: 0 0 20px rgba(203, 242, 61, 0.30);
 
   &:hover {
     background: #b8d934;
     transform: translateY(-1px);
+    box-shadow: 0 0 32px rgba(203, 242, 61, 0.48);
   }
 `;
 
@@ -396,58 +484,58 @@ export function Hero() {
           </HeroContent>
 
           <FadeUp $delay={140}>
-          <SwapBox>
-            <SwapHead>
-              <SwapTitle>Business settlement</SwapTitle>
-              <LiveBadge>LIVE ROUTE</LiveBadge>
-            </SwapHead>
+            <SwapBox>
+              <SwapHead>
+                <SwapTitle>Business settlement</SwapTitle>
+                <LiveBadge>LIVE ROUTE</LiveBadge>
+              </SwapHead>
 
-            <SwapField>
-              <SwapLabel>You send</SwapLabel>
-              <SwapAmount>125,000.00</SwapAmount>
-              <TokenBadge>
-                <TokenFlag $bgColor="var(--ink)">₹</TokenFlag>
-                IDR Stablecoin
-              </TokenBadge>
-            </SwapField>
+              <SwapField>
+                <SwapLabel>You send</SwapLabel>
+                <SwapAmount>125,000.00</SwapAmount>
+                <TokenBadge>
+                  <TokenFlag $bgColor="var(--ink)">₹</TokenFlag>
+                  IDR Stablecoin
+                </TokenBadge>
+              </SwapField>
 
-            <SwapDivider>
-              <SwapArrow>↕</SwapArrow>
-            </SwapDivider>
+              <SwapDivider>
+                <SwapArrow>↕</SwapArrow>
+              </SwapDivider>
 
-            <SwapField>
-              <SwapLabel>Recipient receives</SwapLabel>
-              <SwapAmount>7,812.50</SwapAmount>
-              <TokenBadge>
-                <TokenFlag $bgColor="var(--bg-deep)">$</TokenFlag>
-                USDC
-              </TokenBadge>
-            </SwapField>
+              <SwapField>
+                <SwapLabel>Recipient receives</SwapLabel>
+                <SwapAmount>7,812.50</SwapAmount>
+                <TokenBadge>
+                  <TokenFlag $bgColor="var(--bg-deep)">$</TokenFlag>
+                  USDC
+                </TokenBadge>
+              </SwapField>
 
-            <CountryGrid>
-              <CountryField>
-                <CountryLabel>From country</CountryLabel>
-                <CountryName>Indonesia</CountryName>
-              </CountryField>
-              <CountryField>
-                <CountryLabel>To country</CountryLabel>
-                <CountryName>Singapore</CountryName>
-              </CountryField>
-            </CountryGrid>
+              <CountryGrid>
+                <CountryField>
+                  <CountryLabel>From country</CountryLabel>
+                  <CountryName>Indonesia</CountryName>
+                </CountryField>
+                <CountryField>
+                  <CountryLabel>To country</CountryLabel>
+                  <CountryName>Singapore</CountryName>
+                </CountryField>
+              </CountryGrid>
 
-            <SwapMeta>
-              <MetaItem>
-                <MetaLabel>Estimated time</MetaLabel>
-                <MetaValue>Minutes</MetaValue>
-              </MetaItem>
-              <MetaItem style={{ textAlign: "right" }}>
-                <MetaLabel>Reference rate</MetaLabel>
-                <MetaValue>1 USDC = 16,000 IDR</MetaValue>
-              </MetaItem>
-            </SwapMeta>
+              <SwapMeta>
+                <MetaItem>
+                  <MetaLabel>Estimated time</MetaLabel>
+                  <MetaValue>Minutes</MetaValue>
+                </MetaItem>
+                <MetaItem style={{ textAlign: "right" }}>
+                  <MetaLabel>Reference rate</MetaLabel>
+                  <MetaValue>1 USDC = 16,000 IDR</MetaValue>
+                </MetaItem>
+              </SwapMeta>
 
-            <SwapCTA>Swap to USDC</SwapCTA>
-          </SwapBox>
+              <SwapCTA>Swap to USDC</SwapCTA>
+            </SwapBox>
           </FadeUp>
         </HeroGrid>
       </Wrap>
