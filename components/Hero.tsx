@@ -409,6 +409,16 @@ const MetaVal = styled.span`
   font-variant-numeric: tabular-nums;
 `;
 
+/* ── Reassurance microcopy under the quote meta ── */
+const WidgetNote = styled.p`
+  font-size: 11px;
+  color: var(--ink-mute);
+  line-height: 1.55;
+  margin: 8px 0 0;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line-soft);
+`;
+
 /* ── CTA ── */
 const ConnectBtn = styled.button`
   width: 100%;
@@ -557,6 +567,11 @@ export function Hero() {
                   <MetaVal>—</MetaVal>
                 </MetaRow>
               </QuoteMeta>
+
+              {/* Microcopy: bridge the Web3 jargon gap for finance teams */}
+              <WidgetNote>
+                USDT can be paid out directly to a bank account — GBP, SGD, and more — via our licensed delivery partners.
+              </WidgetNote>
 
               {/* CTA */}
               <ConnectBtn>
