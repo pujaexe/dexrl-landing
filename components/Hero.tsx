@@ -262,29 +262,19 @@ const TokenBox = styled.div`
   &:hover { border-color: var(--line); }
 `;
 
-/* Country flag badge — circular, neutral bg */
-const FlagBadge = styled.div`
+/* Circular flag icon — uses HatScripts/circle-flags SVG via jsDelivr */
+const CircleFlag = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #F2F5F4;
-  border: 1.5px solid rgba(0,62,44,0.09);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
   flex-shrink: 0;
-  overflow: hidden;
-  line-height: 1;
-  /* Crisp emoji rendering */
-  -webkit-font-smoothing: auto;
-  user-select: none;
+  display: block;
+  object-fit: cover;
 `;
 
-const FlagBadgeSm = styled(FlagBadge)`
-  width: 28px;
-  height: 28px;
-  font-size: 15px;
+const CircleFlagSm = styled(CircleFlag)`
+  width: 27px;
+  height: 27px;
 `;
 
 const TokenInfo = styled.div`
@@ -502,7 +492,7 @@ export function Hero() {
                 <TokenColWrap>
                   <FieldLabel>From</FieldLabel>
                   <TokenBox>
-                    <FlagBadge aria-label="Indonesia">🇮🇩</FlagBadge>
+                    <CircleFlag src="https://cdn.jsdelivr.net/gh/HatScripts/circle-flags@latest/flags/id.svg" alt="Indonesia" />
                     <TokenInfo>
                       <TokenNameRow>
                         IDRX <ChevronDown size={11} strokeWidth={2.5} />
@@ -521,7 +511,7 @@ export function Hero() {
                 <TokenColWrap>
                   <FieldLabel>To</FieldLabel>
                   <TokenBox>
-                    <FlagBadge aria-label="United States">🇺🇸</FlagBadge>
+                    <CircleFlag src="https://cdn.jsdelivr.net/gh/HatScripts/circle-flags@latest/flags/us.svg" alt="United States" />
                     <TokenInfo>
                       <TokenNameRow>
                         USDT <ChevronDown size={11} strokeWidth={2.5} />
@@ -537,7 +527,7 @@ export function Hero() {
               <SectionBlock>
                 <FieldLabel>Send</FieldLabel>
                 <AmountField>
-                  <FlagBadgeSm aria-label="Indonesia">🇮🇩</FlagBadgeSm>
+                  <CircleFlagSm src="https://cdn.jsdelivr.net/gh/HatScripts/circle-flags@latest/flags/id.svg" alt="Indonesia" />
                   <AmountInput
                     type="number"
                     placeholder="0.00"
