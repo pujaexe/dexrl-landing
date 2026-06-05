@@ -2,20 +2,17 @@
 
 import React, { useState, useEffect } from "react";
 import styled, { css, keyframes } from "styled-components";
-import { SendHorizontal, Zap, ShieldCheck } from "lucide-react";
+import { LogIn, Coins, MapPin, CheckCircle2 } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { useInView } from "../hooks/useInView";
 
-/* ── Each step is shown for this many ms ── */
 const STEP_DURATION = 3500;
 
-/* ── Progress bar sweeps left → right over STEP_DURATION ── */
 const sweep = keyframes`
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
 `;
 
-/* ── Number counts up with a slight bounce ── */
 const popIn = keyframes`
   0%   { opacity: 0; transform: translateY(6px) scale(0.88); }
   60%  { transform: translateY(-2px) scale(1.04); }
@@ -26,8 +23,6 @@ const iconFloat = keyframes`
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-4px); }
 `;
-
-/* ─────────────────────────────────────────────── */
 
 const StepsSection = styled.section``;
 
@@ -75,17 +70,19 @@ const Sub = styled.p`
   margin: 0;
 `;
 
-/* ── Grid: reveal on scroll, click/auto cycles active step ── */
 const StepsGrid = styled.div<{ $inView: boolean }>`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 
-  @media (max-width: 820px) {
+  @media (max-width: 980px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 520px) {
     grid-template-columns: 1fr;
   }
 
-  /* Scroll-reveal stagger */
   & > * {
     opacity: 0;
     transform: translateY(24px);
@@ -96,8 +93,9 @@ const StepsGrid = styled.div<{ $inView: boolean }>`
 
   ${(p) => p.$inView && css`
     & > *:nth-child(1) { opacity: 1; transform: none; transition-delay:   0ms; }
-    & > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 120ms; }
-    & > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 240ms; }
+    & > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 100ms; }
+    & > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 200ms; }
+    & > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 300ms; }
   `}
 
   @media (prefers-reduced-motion: reduce) {
@@ -105,10 +103,9 @@ const StepsGrid = styled.div<{ $inView: boolean }>`
   }
 `;
 
-/* ── Individual step card ── */
 const StepCard = styled.div<{ $active: boolean }>`
   position: relative;
-  padding: 32px 28px 36px;
+  padding: 28px 24px 32px;
   border-radius: var(--radius);
   cursor: pointer;
   overflow: hidden;
@@ -122,7 +119,6 @@ const StepCard = styled.div<{ $active: boolean }>`
   transform: ${(p) => p.$active ? "translateY(-4px)" : "none"};
   border: 1px solid ${(p) => p.$active ? "var(--line)" : "transparent"};
 
-  /* Left lime accent strip */
   &::before {
     content: '';
     position: absolute;
@@ -143,16 +139,14 @@ const StepCard = styled.div<{ $active: boolean }>`
   }
 `;
 
-/* ── Step number: small+muted when inactive, bold+dark when active ── */
 const StepNum = styled.div<{ $active: boolean }>`
   font-family: var(--serif);
   font-style: italic;
   transition: font-size 0.35s ease, color 0.35s ease, margin-bottom 0.35s ease;
-
-  font-size:     ${(p) => p.$active ? "52px"          : "15px"};
-  color:         ${(p) => p.$active ? "var(--ink)"     : "var(--ink-mute)"};
-  line-height:   ${(p) => p.$active ? "1"              : "1"};
-  margin-bottom: ${(p) => p.$active ? "16px"           : "20px"};
+  font-size:     ${(p) => p.$active ? "48px" : "15px"};
+  color:         ${(p) => p.$active ? "var(--ink)" : "var(--ink-mute)"};
+  line-height:   1;
+  margin-bottom: ${(p) => p.$active ? "14px" : "18px"};
   font-weight:   400;
 
   ${(p) => p.$active && css`
@@ -160,16 +154,15 @@ const StepNum = styled.div<{ $active: boolean }>`
   `}
 `;
 
-/* ── Icon shown only when step is active ── */
 const StepIcon = styled.div<{ $active: boolean }>`
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
   background: var(--accent-soft);
   color: var(--on-accent);
   display: grid;
   place-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   transition: opacity 0.35s ease, transform 0.35s ease;
   opacity: ${(p) => p.$active ? 1 : 0};
   transform: ${(p) => p.$active ? "none" : "scale(0.7) translateY(8px)"};
@@ -183,21 +176,20 @@ const StepH3 = styled.h3<{ $active: boolean }>`
   font-family: var(--serif);
   font-weight: 400;
   letter-spacing: -0.015em;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   line-height: 1.15;
   transition: font-size 0.35s ease, color 0.35s ease;
-  font-size: ${(p) => p.$active ? "24px" : "22px"};
+  font-size: ${(p) => p.$active ? "21px" : "19px"};
   color:     ${(p) => p.$active ? "var(--ink)" : "var(--ink-soft)"};
 `;
 
 const StepP = styled.p`
   color: var(--ink-soft);
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
 `;
 
-/* ── Progress bar: fills from left over STEP_DURATION ── */
 const ProgressTrack = styled.div`
   position: absolute;
   bottom: 0;
@@ -214,7 +206,6 @@ const ProgressFill = styled.div`
   animation: ${sweep} ${STEP_DURATION}ms linear forwards;
 `;
 
-/* ── Dot indicators below the grid ── */
 const Dots = styled.div`
   display: flex;
   justify-content: center;
@@ -233,35 +224,38 @@ const Dot = styled.button<{ $active: boolean }>`
   padding: 0;
 `;
 
-/* ─────────────────────────────────────────────── */
-
 const steps = [
   {
     num: "01",
-    icon: SendHorizontal,
-    title: "Enter amount and destination",
-    description: "Tell dexRL where the money's going and how much. We show you the fee and exactly what arrives — before you confirm anything.",
+    icon: LogIn,
+    title: "Sign in",
+    description: "Use your email or wallet to start.",
   },
   {
     num: "02",
-    icon: Zap,
-    title: "We route it",
-    description: "Our router finds the cheapest path through on-chain liquidity and executes automatically. You just confirm the price.",
+    icon: Coins,
+    title: "Choose what to send",
+    description: "Select the stablecoin or digital asset you want to swap.",
   },
   {
     num: "03",
-    icon: ShieldCheck,
-    title: "It lands in their account",
-    description: "The recipient gets local currency in their bank. No wallet on their end, no stablecoin to convert, no explaining what just happened.",
+    icon: MapPin,
+    title: "Enter the recipient",
+    description: "Add where the funds should be received.",
+  },
+  {
+    num: "04",
+    icon: CheckCircle2,
+    title: "Review and swap",
+    description: "Confirm the details. dexRL helps route and complete the settlement.",
   },
 ];
 
 export function Steps() {
   const { ref, inView } = useInView();
   const [active, setActive] = useState(0);
-  const [tick, setTick]     = useState(0); // remounts ProgressFill to reset animation
+  const [tick, setTick]     = useState(0);
 
-  /* Auto-cycle */
   useEffect(() => {
     const t = setTimeout(() => {
       setActive((a) => (a + 1) % steps.length);
@@ -270,7 +264,6 @@ export function Steps() {
     return () => clearTimeout(t);
   }, [active]);
 
-  /* Jump to a step on click */
   const goTo = (idx: number) => {
     setActive(idx);
     setTick((k) => k + 1);
@@ -281,7 +274,7 @@ export function Steps() {
       <Wrap>
         <StepsHead>
           <Reveal delay={0}><SectionEyebrow>How it works</SectionEyebrow></Reveal>
-          <Reveal delay={90}><H2>Three steps. <em>That&apos;s it.</em></H2></Reveal>
+          <Reveal delay={90}><H2>Four steps. <em>That&apos;s it.</em></H2></Reveal>
           <Reveal delay={170}>
             <Sub>No crypto knowledge needed. Works like a bank transfer — just faster and cheaper.</Sub>
           </Reveal>
@@ -300,18 +293,12 @@ export function Steps() {
                 aria-label={`Step ${s.num}: ${s.title}`}
                 aria-pressed={isActive}
               >
-                {/* Large step number */}
                 <StepNum $active={isActive}>{s.num}</StepNum>
-
-                {/* Icon — visible only when active */}
                 <StepIcon $active={isActive} aria-hidden="true">
-                  <Icon size={20} strokeWidth={1.8} />
+                  <Icon size={18} strokeWidth={1.8} />
                 </StepIcon>
-
                 <StepH3 $active={isActive}>{s.title}</StepH3>
                 <StepP>{s.description}</StepP>
-
-                {/* Progress bar — key={tick} resets animation on step change */}
                 {isActive && (
                   <ProgressTrack>
                     <ProgressFill key={tick} />
@@ -322,7 +309,6 @@ export function Steps() {
           })}
         </StepsGrid>
 
-        {/* Dot indicators */}
         <Dots role="tablist" aria-label="Step indicators">
           {steps.map((s, idx) => (
             <Dot

@@ -138,10 +138,10 @@ const ComplianceNote = styled.div`
 `;
 
 const partners = [
-  { role: "IDR stablecoin issuer",   name: "IDRX",      region: "Indonesia — KYC & AML compliant" },
-  { role: "GBP delivery partner",    name: "Monerium",  region: "United Kingdom — FCA authorised" },
-  { role: "SGD delivery partner",    name: "StraitsX",  region: "Singapore — MAS licensed"        },
-  { role: "Wallet infrastructure",   name: "Privy",     region: "Global — hardware-vault TEE"     },
+  { role: "Onramp partner",        name: "Licensed stablecoin issuer",     region: "Indonesia"      },
+  { role: "Delivery partner",      name: "Regulated payment institution",  region: "United Kingdom" },
+  { role: "Delivery partner",      name: "Regulated payment institution",  region: "Singapore"      },
+  { role: "Wallet infrastructure", name: "Hardware-secured key vault",     region: "Global"         },
 ];
 
 export function Fiat() {
@@ -157,7 +157,7 @@ export function Fiat() {
             </Reveal>
             <Reveal delay={170}>
               <Sub>
-                IDRX converts Indonesian rupiah. Monerium credits UK bank accounts. StraitsX handles Singapore. Each holds the licence for their market. dexRL connects them.
+                We don&apos;t convert currencies ourselves. Licensed local partners do — each regulated in their market. dexRL connects them.
               </Sub>
             </Reveal>
           </div>
@@ -173,7 +173,7 @@ export function Fiat() {
             </PartnersGrid>
             <Reveal delay={400}>
               <ComplianceNote>
-                dexRL is a routing layer, not a money transmitter. IDRX, Monerium, and StraitsX hold the regulated licences and handle KYC, AML, and fiat compliance in their markets.
+                dexRL is a routing layer, not a money transmitter. Licensed partners at each end hold the regulated licences and handle KYC, AML, and fiat compliance in their markets.
               </ComplianceNote>
             </Reveal>
           </div>

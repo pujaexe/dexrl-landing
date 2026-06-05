@@ -463,7 +463,7 @@ export function Hero() {
             </FadeUp>
             <FadeUp $delay={180}>
               <Lede>
-                Send money across borders in under 10 minutes. Our fee is 0.6–1.1% — banks charge 4–6%. Your funds move on stablecoin rails. You won&apos;t notice.
+                Send money across borders faster and at a fraction of what banks charge. Your funds move on stablecoin rails. You won&apos;t notice the difference.
               </Lede>
             </FadeUp>
             <FadeUp $delay={260}>
@@ -475,8 +475,8 @@ export function Hero() {
             <FadeUp $delay={340}>
               <HeroTrust>
                 <span>You own your wallet</span>
-                <span>Indonesia · Singapore · UK</span>
-                <span>&lt; 10 min end-to-end</span>
+                <span>Stablecoin corridors across Asia</span>
+                <span>Faster than any wire transfer</span>
               </HeroTrust>
             </FadeUp>
           </HeroContent>

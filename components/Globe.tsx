@@ -121,7 +121,7 @@ export function Globe() {
               </Reveal>
               <Reveal delay={240}>
                 <Sub>
-                  Live now: Indonesia → UK. Indonesia → Singapore follows in Q2 2026. Every new corridor runs on the same infrastructure — near-zero additional cost.
+                  Direct stablecoin corridors between countries, starting with Southeast Asia. Every new corridor runs on the same infrastructure — more routes, same simplicity.
                 </Sub>
               </Reveal>
               <Reveal delay={320}>

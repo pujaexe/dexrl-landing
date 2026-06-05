@@ -121,9 +121,9 @@ const CardP = styled.p`
 `;
 
 const benefits = [
-  { num: "01", title: "Ten minutes, not three days",   description: "Enter an amount and a recipient's account. Confirm the fee. Done. No account setup, no crypto wallet, no explaining to your finance team." },
-  { num: "02", title: "Not your compliance problem",   description: "IDRX handles KYC for Indonesian senders. Monerium handles UK payouts. StraitsX handles Singapore. dexRL routes between them — that's it." },
-  { num: "03", title: "Your money, your wallet",       description: "Your wallet is created at sign-in and only you can unlock it. dexRL processes the route. We can't touch the funds — that's not a promise, it's how the hardware works." },
+  { num: "01", title: "Fewer steps than a bank transfer",  description: "Enter an amount and a recipient. Confirm the fee. Done. No account setup, no crypto wallet, no explaining to your finance team." },
+  { num: "02", title: "Not your compliance problem",       description: "KYC, AML, and fiat licensing are handled by regulated institutions in each market. dexRL routes between them." },
+  { num: "03", title: "Your money, your wallet",           description: "Your wallet is created at sign-in and only you can unlock it. dexRL processes the route. We can't touch the funds — that's not a promise, it's how the hardware works." },
 ];
 
 export function Benefits() {
