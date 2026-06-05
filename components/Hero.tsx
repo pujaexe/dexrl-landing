@@ -9,7 +9,6 @@ const fadeUp = keyframes`
   to   { opacity: 1; transform: none; }
 `;
 
-/* ── Film grain shift — steps(1) = jump-cut, not interpolated ── */
 const grainShift = keyframes`
   0%   { transform: translate(0%,    0%); }
   12%  { transform: translate(-4%,  -9%); }
@@ -25,15 +24,10 @@ const grainShift = keyframes`
 const FadeUp = styled.div<{ $delay?: number }>`
   animation: ${fadeUp} 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: ${(p) => p.$delay ?? 0}ms;
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
+  @media (prefers-reduced-motion: reduce) { animation: none; }
 `;
 
-/* ─────────────────────────────────────────────────────
-   Hero section — organic mesh gradient + grain overlay
-   ───────────────────────────────────────────────────── */
+/* ── Hero: organic mesh gradient + film grain ── */
 const HeroSection = styled.section`
   padding: 80px 0 96px;
   position: relative;
@@ -41,12 +35,12 @@ const HeroSection = styled.section`
   isolation: isolate;
 
   background:
-    radial-gradient(ellipse 62% 68% at 14% 68%, rgba(203, 242, 61, 0.50) 0%, transparent 62%),
-    radial-gradient(ellipse 48% 42% at -4% 4%,  rgba(236, 240, 239, 0.20) 0%, transparent 55%),
-    radial-gradient(ellipse 38% 38% at 38% 96%, rgba(203, 242, 61, 0.22) 0%, transparent 55%),
-    radial-gradient(ellipse 58% 62% at 44% 2%,  rgba(0, 88, 64, 0.68) 0%, transparent 65%),
-    radial-gradient(ellipse 62% 68% at 92% 28%, rgba(0, 33, 22, 0.92) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 50% at 58% 100%, rgba(0, 62, 44, 0.58) 0%, transparent 62%),
+    radial-gradient(ellipse 62% 68% at 14% 68%, rgba(203,242,61,0.50) 0%, transparent 62%),
+    radial-gradient(ellipse 48% 42% at -4%  4%, rgba(236,240,239,0.20) 0%, transparent 55%),
+    radial-gradient(ellipse 38% 38% at 38% 96%, rgba(203,242,61,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 58% 62% at 44%  2%, rgba(0,88,64,0.68)    0%, transparent 65%),
+    radial-gradient(ellipse 62% 68% at 92% 28%, rgba(0,33,22,0.92)    0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 58% 100%,rgba(0,62,44,0.58)    0%, transparent 62%),
     #001B0E;
 
   &::before {
@@ -76,10 +70,7 @@ const Wrap = styled.div`
   padding: 0 32px;
   position: relative;
   z-index: 1;
-
-  @media (max-width: 720px) {
-    padding: 0 20px;
-  }
+  @media (max-width: 720px) { padding: 0 20px; }
 `;
 
 const HeroGrid = styled.div`
@@ -87,11 +78,7 @@ const HeroGrid = styled.div`
   grid-template-columns: 1.05fr 1fr;
   gap: 80px;
   align-items: center;
-
-  @media (max-width: 980px) {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
+  @media (max-width: 980px) { grid-template-columns: 1fr; gap: 48px; }
 `;
 
 const HeroContent = styled.div``;
@@ -101,15 +88,11 @@ const Eyebrow = styled.div`
   align-items: center;
   gap: 10px;
   font-size: 13px;
-  color: rgba(203, 242, 61, 0.72);
+  color: rgba(203,242,61,0.72);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 18px;
-
-  &::before {
-    content: "•";
-    color: #CBF23D;
-  }
+  &::before { content: "•"; color: #CBF23D; }
 `;
 
 const H1 = styled.h1`
@@ -121,16 +104,12 @@ const H1 = styled.h1`
   color: #ECF0EF;
   text-wrap: balance;
   font-weight: 400;
-
-  em {
-    font-style: italic;
-    color: #CBF23D;
-  }
+  em { font-style: italic; color: #CBF23D; }
 `;
 
 const Lede = styled.p`
   font-size: 19px;
-  color: rgba(236, 240, 239, 0.78);
+  color: rgba(236,240,239,0.78);
   max-width: 52ch;
   text-wrap: pretty;
   line-height: 1.58;
@@ -159,27 +138,17 @@ const Button = styled.button<{ variant?: "ghost" }>`
     color 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;
 
-  ${(props) =>
-    props.variant === "ghost"
-      ? `
+  ${(props) => props.variant === "ghost" ? `
     background: transparent;
-    color: rgba(236, 240, 239, 0.90);
-    border-color: rgba(255, 255, 255, 0.28);
-    &:hover {
-      border-color: rgba(255, 255, 255, 0.65);
-      background: rgba(255, 255, 255, 0.07);
-    }
-  `
-      : `
+    color: rgba(236,240,239,0.90);
+    border-color: rgba(255,255,255,0.28);
+    &:hover { border-color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.07); }
+  ` : `
     background: #CBF23D;
     color: #003E2C;
     font-weight: 600;
-    box-shadow: 0 0 28px rgba(203, 242, 61, 0.38);
-    &:hover {
-      background: #b8d934;
-      transform: translateY(-1px);
-      box-shadow: 0 0 40px rgba(203, 242, 61, 0.52);
-    }
+    box-shadow: 0 0 28px rgba(203,242,61,0.38);
+    &:hover { background: #b8d934; transform: translateY(-1px); box-shadow: 0 0 40px rgba(203,242,61,0.52); }
   `}
 `;
 
@@ -188,7 +157,7 @@ const HeroTrust = styled.div`
   align-items: center;
   gap: 20px;
   margin-top: 40px;
-  color: rgba(236, 240, 239, 0.48);
+  color: rgba(236,240,239,0.48);
   font-size: 13px;
   flex-wrap: wrap;
   letter-spacing: 0.01em;
@@ -197,49 +166,45 @@ const HeroTrust = styled.div`
     display: flex;
     align-items: center;
     gap: 7px;
-
     &::before {
       content: '';
-      width: 4px;
-      height: 4px;
+      width: 4px; height: 4px;
       border-radius: 50%;
-      background: rgba(203, 242, 61, 0.50);
+      background: rgba(203,242,61,0.50);
       flex-shrink: 0;
     }
-
     &:first-child::before { display: none; }
   }
 `;
 
-/* ═══════════════════════════════════════════
-   SWAP BOX — matches product prototype
-   ═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   SWAP WIDGET
+   ═══════════════════════════════════════════════════════ */
 
 const SwapBox = styled.div`
-  background: rgba(255, 255, 255, 0.97);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255,255,255,0.97);
+  border: 1px solid rgba(255,255,255,0.55);
   border-radius: 20px;
-  padding: 22px;
+  padding: 20px;
   box-shadow:
-    0 0  0 1px rgba(0, 33, 22, 0.06),
-    0 8px 32px -8px rgba(0, 20, 10, 0.40),
-    0 32px 80px -16px rgba(0, 14, 7, 0.60);
-  position: relative;
+    0 0 0 1px rgba(0,33,22,0.06),
+    0 8px 32px -8px rgba(0,20,10,0.40),
+    0 32px 80px -16px rgba(0,14,7,0.60);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 `;
 
-/* Header row: "Swap" + profile icon */
+/* ── Header ── */
 const SwapHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 `;
 
 const SwapTitle = styled.h3`
   font-family: var(--serif);
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 400;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -257,67 +222,75 @@ const ProfileBtn = styled.button`
   border: none;
   cursor: pointer;
   transition: background 0.15s ease;
-
-  &:hover {
-    background: var(--bg-deep);
-  }
+  &:hover { background: var(--bg-deep); }
 `;
 
-/* Token selector row: From [⇄] To */
+/* ── Token row: From [⇄] To ── */
 const TokenRow = styled.div`
   display: grid;
-  grid-template-columns: 1fr 32px 1fr;
+  grid-template-columns: 1fr 36px 1fr;
   gap: 6px;
   align-items: end;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 `;
 
-const TokenSelectWrap = styled.div`
+const TokenColWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
 `;
 
 const FieldLabel = styled.div`
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 10.5px;
+  font-weight: 600;
   color: var(--ink-mute);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
+  padding-left: 2px;
 `;
 
-const TokenSelectBox = styled.div`
+const TokenBox = styled.div`
   background: var(--bg);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-sm);
-  padding: 10px 11px;
+  border: 1.5px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 9px 11px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   cursor: pointer;
-  transition: border-color 0.15s ease;
-
-  &:hover {
-    border-color: var(--line);
-  }
+  transition: border-color 0.15s ease, background 0.15s ease;
+  &:hover { border-color: var(--line); }
 `;
 
-const TokenIcon = styled.div<{ $bg: string }>`
-  width: 30px;
-  height: 30px;
+/* Country flag badge — circular, neutral bg */
+const FlagBadge = styled.div`
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: ${(p) => p.$bg};
-  color: white;
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  font-size: 12px;
+  background: #F2F5F4;
+  border: 1.5px solid rgba(0,62,44,0.09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
   flex-shrink: 0;
+  overflow: hidden;
+  line-height: 1;
+  /* Crisp emoji rendering */
+  -webkit-font-smoothing: auto;
+  user-select: none;
 `;
 
-const TokenMeta = styled.div`
+const FlagBadgeSm = styled(FlagBadge)`
+  width: 28px;
+  height: 28px;
+  font-size: 15px;
+`;
+
+const TokenInfo = styled.div`
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 `;
 
 const TokenNameRow = styled.div`
@@ -327,30 +300,36 @@ const TokenNameRow = styled.div`
   font-weight: 600;
   font-size: 13px;
   color: var(--ink);
-  line-height: 1.2;
+  line-height: 1.25;
 `;
 
-const TokenSubtext = styled.div<{ $accent?: boolean }>`
+const TokenRateLine = styled.div`
   font-size: 10px;
-  color: ${(p) => (p.$accent ? "var(--ink-soft)" : "var(--ink-mute)")};
+  color: var(--ink-mute);
   margin-top: 1px;
-  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
-const ExchangeBtn = styled.button`
-  width: 32px;
-  height: 32px;
+const TokenNetLine = styled.div`
+  font-size: 10px;
+  color: var(--ink-soft);
+  margin-top: 1px;
+`;
+
+const SwapBtn = styled.button`
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: var(--bg);
-  border: 1px solid var(--line);
+  border: 1.5px solid var(--line);
   display: grid;
   place-items: center;
-  color: var(--ink-soft);
+  color: var(--ink-mute);
   cursor: pointer;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
   transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
-  flex-shrink: 0;
-
   &:hover {
     border-color: var(--accent);
     color: var(--ink);
@@ -358,8 +337,8 @@ const ExchangeBtn = styled.button`
   }
 `;
 
-/* Send amount field */
-const SendWrap = styled.div`
+/* ── Send amount ── */
+const SectionBlock = styled.div`
   margin-bottom: 10px;
 `;
 
@@ -368,28 +347,12 @@ const AmountField = styled.div`
   align-items: center;
   gap: 10px;
   background: var(--bg);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
+  border: 1.5px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 11px 13px;
   margin-top: 5px;
   transition: border-color 0.15s ease;
-
-  &:focus-within {
-    border-color: var(--line);
-  }
-`;
-
-const TokenIconSm = styled.div<{ $bg: string }>`
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: ${(p) => p.$bg};
-  color: white;
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  font-size: 11px;
-  flex-shrink: 0;
+  &:focus-within { border-color: var(--line); }
 `;
 
 const AmountInput = styled.input`
@@ -402,53 +365,43 @@ const AmountInput = styled.input`
   color: var(--ink-mute);
   letter-spacing: -0.02em;
   min-width: 0;
-
-  &::placeholder {
-    color: var(--line);
-  }
+  &::placeholder { color: #C2CFCB; }
+  /* Remove number spinner */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  -moz-appearance: textfield;
 `;
 
-/* Destination address field */
-const AddressWrap = styled.div`
-  margin-bottom: 4px;
-`;
-
+/* ── Destination address ── */
 const AddressInput = styled.input`
   display: block;
   width: 100%;
+  box-sizing: border-box;
   margin-top: 5px;
   background: var(--bg);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  font-size: 14px;
-  font-family: var(--sans);
+  border: 1.5px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 11px 13px;
+  font-size: 13px;
+  font-family: var(--mono);
   color: var(--ink);
   outline: none;
   transition: border-color 0.15s ease;
-  box-sizing: border-box;
-
-  &::placeholder {
-    color: var(--ink-mute);
-    font-size: 13px;
-  }
-
-  &:focus {
-    border-color: var(--line);
-  }
+  &::placeholder { color: var(--ink-mute); font-family: var(--sans); font-size: 13px; }
+  &:focus { border-color: var(--line); }
 `;
 
-/* Meta summary */
-const SwapMeta = styled.div`
-  border-top: 1px solid var(--line-soft);
+/* ── Quote summary ── */
+const QuoteMeta = styled.div`
+  border-top: 1.5px solid var(--line-soft);
   margin-top: 12px;
   padding-top: 10px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 `;
 
-const MetaLine = styled.div`
+const MetaRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -463,13 +416,14 @@ const MetaVal = styled.span`
   font-size: 12px;
   font-weight: 500;
   color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
 `;
 
-/* Connect Account CTA */
+/* ── CTA ── */
 const ConnectBtn = styled.button`
   width: 100%;
   margin-top: 14px;
-  padding: 15px;
+  padding: 14px;
   border-radius: 999px;
   background: var(--accent);
   color: var(--on-accent);
@@ -483,24 +437,25 @@ const ConnectBtn = styled.button`
   gap: 8px;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-  box-shadow: 0 0 20px rgba(203, 242, 61, 0.28);
+  box-shadow: 0 0 18px rgba(203,242,61,0.28);
 
   &:hover {
     background: #b8d934;
     transform: translateY(-1px);
-    box-shadow: 0 0 32px rgba(203, 242, 61, 0.45);
+    box-shadow: 0 0 30px rgba(203,242,61,0.45);
   }
 `;
 
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
    RENDER
-   ═══════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════ */
 export function Hero() {
   return (
     <HeroSection>
       <Wrap>
         <HeroGrid>
-          {/* ── Left: copy ── */}
+
+          {/* ── Left: marketing copy ── */}
           <HeroContent>
             <FadeUp $delay={0}><Eyebrow>FOR MODERN BUSINESSES</Eyebrow></FadeUp>
             <FadeUp $delay={90}>
@@ -535,56 +490,65 @@ export function Hero() {
               {/* Header */}
               <SwapHeader>
                 <SwapTitle>Swap</SwapTitle>
-                <ProfileBtn aria-label="Account"><User size={15} /></ProfileBtn>
+                <ProfileBtn aria-label="Account">
+                  <User size={15} />
+                </ProfileBtn>
               </SwapHeader>
 
-              {/* From / To token selectors */}
+              {/* From / To */}
               <TokenRow>
-                {/* From */}
-                <TokenSelectWrap>
+
+                {/* FROM — IDRX (Indonesia 🇮🇩) */}
+                <TokenColWrap>
                   <FieldLabel>From</FieldLabel>
-                  <TokenSelectBox>
-                    <TokenIcon $bg="#1A56DB">X</TokenIcon>
-                    <TokenMeta>
+                  <TokenBox>
+                    <FlagBadge aria-label="Indonesia">🇮🇩</FlagBadge>
+                    <TokenInfo>
                       <TokenNameRow>
-                        IDRX <ChevronDown size={11} />
+                        IDRX <ChevronDown size={11} strokeWidth={2.5} />
                       </TokenNameRow>
-                      <TokenSubtext>1 IDRX ≈ 1 IDR</TokenSubtext>
-                    </TokenMeta>
-                  </TokenSelectBox>
-                </TokenSelectWrap>
+                      <TokenRateLine>1 IDRX ≈ 1 IDR</TokenRateLine>
+                    </TokenInfo>
+                  </TokenBox>
+                </TokenColWrap>
 
-                {/* Exchange button */}
-                <ExchangeBtn aria-label="Swap tokens">
-                  <ArrowLeftRight size={13} />
-                </ExchangeBtn>
+                {/* Swap direction button */}
+                <SwapBtn aria-label="Switch tokens">
+                  <ArrowLeftRight size={13} strokeWidth={2.2} />
+                </SwapBtn>
 
-                {/* To */}
-                <TokenSelectWrap>
+                {/* TO — USDT (United States 🇺🇸) */}
+                <TokenColWrap>
                   <FieldLabel>To</FieldLabel>
-                  <TokenSelectBox>
-                    <TokenIcon $bg="#26A17B">₮</TokenIcon>
-                    <TokenMeta>
+                  <TokenBox>
+                    <FlagBadge aria-label="United States">🇺🇸</FlagBadge>
+                    <TokenInfo>
                       <TokenNameRow>
-                        USDT <ChevronDown size={11} />
+                        USDT <ChevronDown size={11} strokeWidth={2.5} />
                       </TokenNameRow>
-                      <TokenSubtext $accent>On Polygon</TokenSubtext>
-                    </TokenMeta>
-                  </TokenSelectBox>
-                </TokenSelectWrap>
+                      <TokenNetLine>On Polygon</TokenNetLine>
+                    </TokenInfo>
+                  </TokenBox>
+                </TokenColWrap>
+
               </TokenRow>
 
               {/* Send amount */}
-              <SendWrap>
+              <SectionBlock>
                 <FieldLabel>Send</FieldLabel>
                 <AmountField>
-                  <TokenIconSm $bg="#1A56DB">X</TokenIconSm>
-                  <AmountInput type="number" placeholder="0.00" min="0" />
+                  <FlagBadgeSm aria-label="Indonesia">🇮🇩</FlagBadgeSm>
+                  <AmountInput
+                    type="number"
+                    placeholder="0.00"
+                    min="0"
+                    inputMode="decimal"
+                  />
                 </AmountField>
-              </SendWrap>
+              </SectionBlock>
 
-              {/* Destination Address */}
-              <AddressWrap>
+              {/* Destination address */}
+              <SectionBlock>
                 <FieldLabel>Destination Address</FieldLabel>
                 <AddressInput
                   type="text"
@@ -592,28 +556,29 @@ export function Hero() {
                   autoComplete="off"
                   spellCheck={false}
                 />
-              </AddressWrap>
+              </SectionBlock>
 
               {/* Quote summary */}
-              <SwapMeta>
-                <MetaLine>
+              <QuoteMeta>
+                <MetaRow>
                   <MetaKey>Minimum Received</MetaKey>
                   <MetaVal>0 USDT</MetaVal>
-                </MetaLine>
-                <MetaLine>
+                </MetaRow>
+                <MetaRow>
                   <MetaKey>Quote valid for</MetaKey>
                   <MetaVal>—</MetaVal>
-                </MetaLine>
-              </SwapMeta>
+                </MetaRow>
+              </QuoteMeta>
 
               {/* CTA */}
               <ConnectBtn>
-                <Lock size={15} />
+                <Lock size={14} strokeWidth={2.5} />
                 Connect Account
               </ConnectBtn>
 
             </SwapBox>
           </FadeUp>
+
         </HeroGrid>
       </Wrap>
     </HeroSection>
