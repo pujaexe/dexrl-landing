@@ -516,31 +516,31 @@ export default function ContactPage() {
                     <RadioGroup>
                       <RadioPill $active={form.intent === "send"}>
                         <input type="radio" name="intent" checked={form.intent === "send"} onChange={() => set("intent", "send")} />
-                        Kirim
+                        Send
                       </RadioPill>
                       <RadioPill $active={form.intent === "receive"}>
                         <input type="radio" name="intent" checked={form.intent === "receive"} onChange={() => set("intent", "receive")} />
-                        Terima
+                        Receive
                       </RadioPill>
                     </RadioGroup>
                   </FieldGroup>
 
                   {/* Currency */}
                   <FieldGroup>
-                    <Label>Mata uang *</Label>
+                    <Label>Currency *</Label>
                     <Select
                       value={form.currency}
                       onChange={(e) => set("currency", e.target.value)}
                       required
                     >
-                      <option value="" disabled>Pilih mata uang</option>
+                      <option value="" disabled>Select a currency</option>
                       <option value="usdt">USDT</option>
                       <option value="usdc">USDC</option>
                       <option value="idr">IDR – Rupiah</option>
                       <option value="sgd">SGD – Singapore Dollar</option>
                       <option value="gbp">GBP – British Pound</option>
                       <option value="usd">USD – US Dollar</option>
-                      <option value="other">Lainnya</option>
+                      <option value="other">Other</option>
                     </Select>
                   </FieldGroup>
 
