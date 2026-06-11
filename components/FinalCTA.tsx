@@ -104,7 +104,7 @@ export function FinalCTA() {
         <Reveal delay={200} y={20}>
           <CTAButtons>
             <Button>Get a quote →</Button>
-            <Button variant="ghost">Talk to our team</Button>
+            <Button variant="ghost" onClick={() => window.dispatchEvent(new CustomEvent("dexrl:contact"))}>Talk to our team</Button>
           </CTAButtons>
         </Reveal>
       </Wrap>

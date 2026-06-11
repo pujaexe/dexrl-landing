@@ -96,7 +96,7 @@ export function Header() {
         <NavLinks>
           <NavLink href="#how"     $scrolled={scrolled}>How it works</NavLink>
           <NavLink href="#partner" $scrolled={scrolled}>Why partner</NavLink>
-          <CTAButton $scrolled={scrolled}>Talk to us</CTAButton>
+          <CTAButton $scrolled={scrolled} onClick={() => window.dispatchEvent(new CustomEvent("dexrl:contact"))}>Talk to us</CTAButton>
         </NavLinks>
       </Nav>
     </HeaderWrapper>
