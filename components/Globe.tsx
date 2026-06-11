@@ -95,6 +95,13 @@ const GlobeMeta = styled.div`
   }
 `;
 
+const CityList = styled.div`
+  font-size: 13px;
+  color: rgba(236, 240, 239, 0.40);
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+`;
+
 const GlobeVisual = styled.div`
   position: relative;
   min-height: 620px;
@@ -117,17 +124,20 @@ export function Globe() {
             <GlobeCopy>
               <Reveal delay={80}><SectionEyebrow>Corridors</SectionEyebrow></Reveal>
               <Reveal delay={160}>
-                <H2>Stablecoin rails <em>across Asia.</em></H2>
+                <H2>Stablecoin rails across Asia. <em>More routes, same infrastructure.</em></H2>
               </Reveal>
               <Reveal delay={240}>
                 <Sub>
-                  Direct stablecoin corridors between countries, starting with Southeast Asia. Every new corridor runs on the same infrastructure. more routes, same simplicity.
+                  Direct settlement corridors between countries, starting in Southeast Asia. Every new corridor runs on the same stack — no rebuild, no delay.
                 </Sub>
               </Reveal>
               <Reveal delay={320}>
                 <GlobeMeta>
-                  <div><b>Indonesia</b> to Singapore</div>
+                  <div>Live: <b>Indonesia → Singapore</b></div>
                 </GlobeMeta>
+              </Reveal>
+              <Reveal delay={400}>
+                <CityList>Jakarta · Singapore · Bangkok · Kuala Lumpur · Ho Chi Minh · Manila · Tokyo · Dubai</CityList>
               </Reveal>
             </GlobeCopy>
             <GlobeVisual>

@@ -97,13 +97,13 @@ export function FinalCTA() {
   return (
     <FinalCTASection>
       <Wrap>
-        <Reveal delay={0}   y={32}><H2>Try a real route. <em>See the fee first.</em></H2></Reveal>
+        <Reveal delay={0}   y={32}><H2>Pick a corridor. See the fee. <em>Send.</em></H2></Reveal>
         <Reveal delay={100} y={24}>
-          <Sub>Pick a corridor, enter an amount, see exactly what arrives and what it costs. No commitment until you hit send.</Sub>
+          <Sub>No commitment until you confirm. No hidden margin. No surprises.</Sub>
         </Reveal>
         <Reveal delay={200} y={20}>
           <CTAButtons>
-            <Button>Swap Now</Button>
+            <Button>Get a quote →</Button>
             <Button variant="ghost">Talk to our team</Button>
           </CTAButtons>
         </Reveal>

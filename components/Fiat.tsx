@@ -9,6 +9,7 @@ const FiatSection = styled.section`
   background: #E6EDEA;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+  scroll-margin-top: 72px;
 `;
 
 const Wrap = styled.div`
@@ -147,7 +148,7 @@ const partners = [
 export function Fiat() {
   const { ref, inView } = useInView();
   return (
-    <FiatSection ref={ref as React.RefObject<HTMLElement>}>
+    <FiatSection id="partner" ref={ref as React.RefObject<HTMLElement>}>
       <Wrap>
         <FiatGrid>
           <div>
@@ -157,7 +158,7 @@ export function Fiat() {
             </Reveal>
             <Reveal delay={170}>
               <Sub>
-                We don&apos;t convert currencies ourselves. Licensed local partners do. each regulated in their market. dexRL connects them.
+                dexRL is a routing layer, not a money transmitter. Licensed partners at each end hold the regulated licences and handle KYC, AML, and fiat compliance in their markets.
               </Sub>
             </Reveal>
           </div>

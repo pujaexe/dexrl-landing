@@ -457,26 +457,26 @@ export function Hero() {
 
           {/* ── Left: marketing copy ── */}
           <HeroContent>
-            <FadeUp $delay={0}><Eyebrow>FOR MODERN BUSINESSES</Eyebrow></FadeUp>
+            <FadeUp $delay={0}><Eyebrow>The global self-custodial stablecoin hub</Eyebrow></FadeUp>
             <FadeUp $delay={90}>
-              <H1>Instant cross-border payments. <em>Zero Web3 complexity.</em></H1>
+              <H1>Move money across borders <em>in minutes.</em><br />The Future Rails for Global Liquidity</H1>
             </FadeUp>
             <FadeUp $delay={180}>
               <Lede>
-                Send money across borders faster and at a fraction of what banks charge. Your funds move on stablecoin rails. You won&apos;t notice the difference.
+                One hub connecting regulated issuers, on-chain liquidity, and licensed off-ramps. Faster and cheaper than banks — and your funds stay yours.
               </Lede>
             </FadeUp>
             <FadeUp $delay={260}>
               <HeroCTAs>
-                <Button>Swap Now →</Button>
+                <Button>Get a quote →</Button>
                 <Button variant="ghost">Talk to our team</Button>
               </HeroCTAs>
             </FadeUp>
             <FadeUp $delay={340}>
               <HeroTrust>
-                <span>You own your wallet</span>
-                <span>Stablecoin corridors across Asia</span>
-                <span>Faster than any wire transfer</span>
+                <span>You own your wallet. Always.</span>
+                <span>Stablecoin corridors across Asia.</span>
+                <span>Settles before the bank opens.</span>
               </HeroTrust>
             </FadeUp>
           </HeroContent>
@@ -524,7 +524,7 @@ export function Hero() {
                       <TokenNameRow>
                         USDT <ChevronDown size={11} strokeWidth={2.5} />
                       </TokenNameRow>
-                      <TokenNetLine>Converts to GBP, SGD &amp; more</TokenNetLine>
+                      <TokenNetLine>Delivered as GBP, SGD &amp; more</TokenNetLine>
                     </TokenInfo>
                   </TokenBox>
                 </TokenColWrap>
@@ -570,7 +570,7 @@ export function Hero() {
 
               {/* Microcopy: bridge the Web3 jargon gap for finance teams */}
               <WidgetNote>
-                USDT can be paid out directly to a bank account GBP, SGD, and more via our licensed delivery partners.
+                Payout goes direct to a bank account. GBP, SGD, and more — handled by licensed delivery partners in each market.
               </WidgetNote>
 
               {/* CTA */}

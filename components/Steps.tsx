@@ -75,11 +75,11 @@ const StepsGrid = styled.div<{ $inView: boolean }>`
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 
-  @media (max-width: 980px) {
+  @media (max-width: 960px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 520px) {
+  @media (max-width: 480px) {
     grid-template-columns: 1fr;
   }
 
@@ -93,9 +93,9 @@ const StepsGrid = styled.div<{ $inView: boolean }>`
 
   ${(p) => p.$inView && css`
     & > *:nth-child(1) { opacity: 1; transform: none; transition-delay:   0ms; }
-    & > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 100ms; }
-    & > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 200ms; }
-    & > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 300ms; }
+    & > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 130ms; }
+    & > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 260ms; }
+    & > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 390ms; }
   `}
 
   @media (prefers-reduced-motion: reduce) {

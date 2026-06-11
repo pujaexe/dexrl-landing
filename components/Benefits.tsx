@@ -121,9 +121,9 @@ const CardP = styled.p`
 `;
 
 const benefits = [
-  { num: "01", title: "Fewer steps than a bank transfer",  description: "Enter an amount and a recipient. Confirm the fee. Done. No account setup, no crypto wallet, no explaining to your finance team." },
-  { num: "02", title: "Not your compliance problem",       description: "KYC, AML, and fiat licensing are handled by regulated institutions in each market. dexRL routes between them." },
-  { num: "03", title: "Your money, your wallet",           description: "Your wallet is created at sign-in and only you can unlock it. dexRL processes the route. We can't touch the funds — that's not a promise, it's how the hardware works." },
+  { num: "01", title: "No account setup. No crypto wallet. No explaining to your finance team.", description: "Enter an amount, enter a recipient. Confirm the fee. That's the whole process. The stablecoin layer underneath is invisible." },
+  { num: "02", title: "KYC, AML, and fiat licensing are someone else's problem.", description: "Regulated institutions handle compliance at each end of every corridor. dexRL routes between them. You're not the compliance officer here." },
+  { num: "03", title: "Your wallet. Your keys. Your funds.", description: "The wallet is created when you sign in and only you can unlock it. dexRL processes the route. We can't touch the money — that's not a policy, that's how the architecture works." },
 ];
 
 export function Benefits() {
@@ -133,7 +133,7 @@ export function Benefits() {
       <Wrap>
         <SectionHead>
           <Reveal delay={0}><SectionEyebrow>What it is</SectionEyebrow></Reveal>
-          <Reveal delay={90}><H2>Built for <em>simple</em> business settlement.</H2></Reveal>
+          <Reveal delay={90}><H2>A hub, not a bank. <em>Infrastructure, not a destination.</em></H2></Reveal>
         </SectionHead>
         <BCardsGrid $inView={inView}>
           {benefits.map((b) => (
