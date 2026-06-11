@@ -469,7 +469,7 @@ export function Hero() {
             <FadeUp $delay={260}>
               <HeroCTAs>
                 <Button>Get a quote →</Button>
-                <Button variant="ghost" onClick={() => window.dispatchEvent(new CustomEvent("dexrl:contact"))}>Talk to our team</Button>
+                <Button as="a" href="/contact" variant="ghost">Talk to our team</Button>
               </HeroCTAs>
             </FadeUp>
             <FadeUp $delay={340}>

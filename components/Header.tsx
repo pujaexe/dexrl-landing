@@ -75,15 +75,16 @@ const CTAButton = styled.button<{ $scrolled: boolean }>`
   }
 `;
 
-export function Header() {
-  const [scrolled, setScrolled] = useState(false);
+export function Header({ forceScrolled }: { forceScrolled?: boolean } = {}) {
+  const [scrolled, setScrolled] = useState(forceScrolled ?? false);
 
   useEffect(() => {
+    if (forceScrolled) return;
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [forceScrolled]);
 
   return (
     <HeaderWrapper $scrolled={scrolled}>
@@ -96,7 +97,7 @@ export function Header() {
         <NavLinks>
           <NavLink href="#how"     $scrolled={scrolled}>How it works</NavLink>
           <NavLink href="#partner" $scrolled={scrolled}>Why partner</NavLink>
-          <CTAButton $scrolled={scrolled} onClick={() => window.dispatchEvent(new CustomEvent("dexrl:contact"))}>Talk to us</CTAButton>
+          <CTAButton as="a" href="/contact" $scrolled={scrolled}>Talk to us</CTAButton>
         </NavLinks>
       </Nav>
     </HeaderWrapper>

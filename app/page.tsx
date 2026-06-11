@@ -7,8 +7,6 @@ import { Security } from "@/components/Security";
 import { Fiat } from "@/components/Fiat";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
-import { ContactModal } from "@/components/ContactModal";
-
 export default function Home() {
   return (
     <main>
@@ -21,7 +19,6 @@ export default function Home() {
       <Fiat />
       <FinalCTA />
       <Footer />
-      <ContactModal />
     </main>
   );
 }
