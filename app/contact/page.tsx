@@ -425,8 +425,8 @@ const steps = [
 ];
 
 interface Form {
-  intent: "send" | "partner";
-  corridor: string;
+  intent: "send" | "receive";
+  currency: string;
   type: "individual" | "company";
   name: string;
   email: string;
@@ -437,7 +437,7 @@ interface Form {
 
 const EMPTY: Form = {
   intent: "send",
-  corridor: "",
+  currency: "",
   type: "individual",
   name: "",
   email: "",
@@ -454,7 +454,7 @@ export default function ContactPage() {
   const set = (k: keyof Form, v: string | boolean) =>
     setForm((p) => ({ ...p, [k]: v }));
 
-  const ready = !!(form.name.trim() && form.email.trim() && form.corridor && form.agreed);
+  const ready = !!(form.name.trim() && form.email.trim() && form.currency && form.agreed);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -516,28 +516,31 @@ export default function ContactPage() {
                     <RadioGroup>
                       <RadioPill $active={form.intent === "send"}>
                         <input type="radio" name="intent" checked={form.intent === "send"} onChange={() => set("intent", "send")} />
-                        Send a payment
+                        Kirim
                       </RadioPill>
-                      <RadioPill $active={form.intent === "partner"}>
-                        <input type="radio" name="intent" checked={form.intent === "partner"} onChange={() => set("intent", "partner")} />
-                        Partner with dexRL
+                      <RadioPill $active={form.intent === "receive"}>
+                        <input type="radio" name="intent" checked={form.intent === "receive"} onChange={() => set("intent", "receive")} />
+                        Terima
                       </RadioPill>
                     </RadioGroup>
                   </FieldGroup>
 
-                  {/* Corridor */}
+                  {/* Currency */}
                   <FieldGroup>
-                    <Label>Which corridor? *</Label>
+                    <Label>Mata uang *</Label>
                     <Select
-                      value={form.corridor}
-                      onChange={(e) => set("corridor", e.target.value)}
+                      value={form.currency}
+                      onChange={(e) => set("currency", e.target.value)}
                       required
                     >
-                      <option value="" disabled>Select a corridor</option>
-                      <option value="id-sg">Indonesia → Singapore</option>
-                      <option value="id-uk">Indonesia → United Kingdom</option>
-                      <option value="multi">Multiple corridors</option>
-                      <option value="other">Not sure yet</option>
+                      <option value="" disabled>Pilih mata uang</option>
+                      <option value="usdt">USDT</option>
+                      <option value="usdc">USDC</option>
+                      <option value="idr">IDR – Rupiah</option>
+                      <option value="sgd">SGD – Singapore Dollar</option>
+                      <option value="gbp">GBP – British Pound</option>
+                      <option value="usd">USD – US Dollar</option>
+                      <option value="other">Lainnya</option>
                     </Select>
                   </FieldGroup>
 
