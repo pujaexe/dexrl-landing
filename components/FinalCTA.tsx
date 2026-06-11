@@ -103,7 +103,7 @@ export function FinalCTA() {
         </Reveal>
         <Reveal delay={200} y={20}>
           <CTAButtons>
-            <Button>Get a quote →</Button>
+            <Button as="a" href="#benefits">Learn more</Button>
             <Button as="a" href="/contact" variant="ghost">Talk to our team</Button>
           </CTAButtons>
         </Reveal>

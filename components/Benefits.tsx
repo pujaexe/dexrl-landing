@@ -5,7 +5,9 @@ import styled, { css } from "styled-components";
 import { Reveal } from "./Reveal";
 import { useInView } from "../hooks/useInView";
 
-const BenefitsSection = styled.section``;
+const BenefitsSection = styled.section`
+  scroll-margin-top: 72px;
+`;
 
 const Wrap = styled.div`
   width: 100%;
