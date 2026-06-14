@@ -232,7 +232,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* JSON-LD structured data for search engines + AI citation */}
         <script
@@ -240,7 +240,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
