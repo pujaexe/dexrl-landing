@@ -32,6 +32,10 @@
   src: url('https://cdn.jsdelivr.net/npm/@fonts/geist@1.0.0/files/geist-600.woff2') format('woff2');
 }
 
+/* Tailwind base (preflight + --tw-* defaults). Kept before the custom reset
+   below so the site's own reset/styled-components baseline still wins. */
+@tailwind base;
+
 :root {
   /* ── Brand Palette: Teal & Lime — dexRL Design System v1.0 ── */
 
@@ -164,3 +168,10 @@ section {
   background: var(--accent);
   color: var(--on-accent);
 }
+
+/* Tailwind components + utilities — required by the ported trading widget,
+   which is styled entirely with Tailwind utility classes. Placed last so
+   utilities win the cascade. The marketing pages use Styled Components and are
+   unaffected (no Tailwind classes). */
+@tailwind components;
+@tailwind utilities;
