@@ -1,7 +1,7 @@
 "use client";
 
 import styled, { keyframes } from "styled-components";
-import { User, ArrowLeftRight, ChevronDown, Lock } from "lucide-react";
+import { ArrowLeftRight, ChevronDown } from "lucide-react";
 
 /* ── Entrance animation ── */
 const fadeUp = keyframes`
@@ -211,18 +211,31 @@ const SwapTitle = styled.h3`
   margin: 0;
 `;
 
-const ProfileBtn = styled.button`
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  background: var(--ink);
-  color: #ECF0EF;
+const UserChip = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const UserEmail = styled.span`
+  font-size: 11.5px;
+  color: var(--ink-mute);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const GoogleBtn = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: #fff;
   display: grid;
   place-items: center;
-  border: none;
+  flex-shrink: 0;
   cursor: pointer;
-  transition: background 0.15s ease;
-  &:hover { background: var(--bg-deep); }
 `;
 
 /* ── Token row: From [⇄] To ── */
@@ -262,19 +275,24 @@ const TokenBox = styled.div`
   &:hover { border-color: var(--line); }
 `;
 
-/* Circular flag icon — uses HatScripts/circle-flags SVG via jsDelivr */
-const CircleFlag = styled.img`
+const TokenCircle = styled.div<{ $bg: string }>`
   width: 32px;
   height: 32px;
   border-radius: 50%;
+  background: ${(p) => p.$bg};
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 700;
   flex-shrink: 0;
-  display: block;
-  object-fit: cover;
+  letter-spacing: -0.02em;
 `;
 
-const CircleFlagSm = styled(CircleFlag)`
+const TokenCircleSm = styled(TokenCircle)`
   width: 27px;
   height: 27px;
+  font-size: 12px;
 `;
 
 const TokenInfo = styled.div`
@@ -409,15 +427,10 @@ const MetaVal = styled.span`
   font-variant-numeric: tabular-nums;
 `;
 
-/* ── Reassurance microcopy under the quote meta ── */
-const WidgetNote = styled.p`
-  font-size: 11px;
-  color: var(--ink-mute);
-  line-height: 1.55;
-  margin: 8px 0 0;
-  padding-top: 8px;
-  border-top: 1px dashed var(--line-soft);
+const TimerVal = styled(MetaVal)`
+  color: #2563eb;
 `;
+
 
 /* ── CTA ── */
 const ConnectBtn = styled.button`
@@ -488,19 +501,28 @@ export function Hero() {
               {/* Header */}
               <SwapHeader>
                 <SwapTitle>Swap</SwapTitle>
-                <ProfileBtn aria-label="Account">
-                  <User size={15} />
-                </ProfileBtn>
+                <UserChip>
+                  <UserEmail>puja.exe@gmail.com</UserEmail>
+                  <GoogleBtn aria-label="Google account">
+                    {/* Google "G" multicolor SVG */}
+                    <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615Z" fill="#4285F4"/>
+                      <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18Z" fill="#34A853"/>
+                      <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332Z" fill="#FBBC05"/>
+                      <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58Z" fill="#EA4335"/>
+                    </svg>
+                  </GoogleBtn>
+                </UserChip>
               </SwapHeader>
 
               {/* From / To */}
               <TokenRow>
 
-                {/* FROM — IDRX (Indonesia 🇮🇩) */}
+                {/* FROM — IDRX */}
                 <TokenColWrap>
                   <FieldLabel>From</FieldLabel>
                   <TokenBox>
-                    <CircleFlag src="https://cdn.jsdelivr.net/gh/HatScripts/circle-flags@latest/flags/id.svg" alt="Indonesia" />
+                    <TokenCircle $bg="#1e4db7">X</TokenCircle>
                     <TokenInfo>
                       <TokenNameRow>
                         IDRX <ChevronDown size={11} strokeWidth={2.5} />
@@ -515,16 +537,16 @@ export function Hero() {
                   <ArrowLeftRight size={13} strokeWidth={2.2} />
                 </SwapBtn>
 
-                {/* TO — USDT (United States 🇺🇸) */}
+                {/* TO — USDT */}
                 <TokenColWrap>
                   <FieldLabel>To</FieldLabel>
                   <TokenBox>
-                    <CircleFlag src="https://cdn.jsdelivr.net/gh/HatScripts/circle-flags@latest/flags/us.svg" alt="United States" />
+                    <TokenCircle $bg="#26a17b">T</TokenCircle>
                     <TokenInfo>
                       <TokenNameRow>
                         USDT <ChevronDown size={11} strokeWidth={2.5} />
                       </TokenNameRow>
-                      <TokenNetLine>Delivered as GBP, SGD &amp; more</TokenNetLine>
+                      <TokenNetLine>On Polygon</TokenNetLine>
                     </TokenInfo>
                   </TokenBox>
                 </TokenColWrap>
@@ -535,7 +557,7 @@ export function Hero() {
               <SectionBlock>
                 <FieldLabel>Send</FieldLabel>
                 <AmountField>
-                  <CircleFlagSm src="https://cdn.jsdelivr.net/gh/HatScripts/circle-flags@latest/flags/id.svg" alt="Indonesia" />
+                  <TokenCircleSm $bg="#1e4db7">X</TokenCircleSm>
                   <AmountInput
                     type="number"
                     placeholder="0.00"
@@ -564,19 +586,13 @@ export function Hero() {
                 </MetaRow>
                 <MetaRow>
                   <MetaKey>Quote valid for</MetaKey>
-                  <MetaVal>—</MetaVal>
+                  <TimerVal>60s</TimerVal>
                 </MetaRow>
               </QuoteMeta>
 
-              {/* Microcopy: bridge the Web3 jargon gap for finance teams */}
-              <WidgetNote>
-                Payout goes direct to a bank account. GBP, SGD, and more — handled by licensed delivery partners in each market.
-              </WidgetNote>
-
               {/* CTA */}
               <ConnectBtn>
-                <Lock size={14} strokeWidth={2.5} />
-                Connect Account
+                Swap to USDT
               </ConnectBtn>
 
             </SwapBox>
