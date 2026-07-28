@@ -1242,12 +1242,17 @@ function SwapWidget() {
           <SelectorHeader>
             <SelectorTitleGroup>
               <SelectorTitle>
-                Select {selectorSource === "from" ? "Source" : "Destination"} Token
+                {pendingToken
+                  ? "Select Blockchain"
+                  : `Select ${selectorSource === "from" ? "Source" : "Destination"} Token`
+                }
               </SelectorTitle>
               <SelectorSub>
-                {selectorSource === "from"
-                  ? "Select IDRX to deposit Rupiah, or pick any stablecoin to swap from your wallet"
-                  : "Select IDRX to receive Rupiah to your bank, or pick a stablecoin to receive to your wallet"
+                {pendingToken
+                  ? `Which network are you holding ${pendingToken.symbol} on? Each network has separate balances.`
+                  : selectorSource === "from"
+                    ? "Select IDRX to deposit Rupiah, or pick any stablecoin to swap from your wallet"
+                    : "Select IDRX to receive Rupiah to your bank, or pick a stablecoin to receive to your wallet"
                 }
               </SelectorSub>
             </SelectorTitleGroup>
@@ -1256,15 +1261,17 @@ function SwapWidget() {
             </CloseSelectorBtn>
           </SelectorHeader>
 
-          <SearchWrap>
-            <SearchInput
-              ref={searchRef}
-              placeholder="Search tokens..."
-              value={tokenSearch}
-              onChange={(e) => setTokenSearch(e.target.value)}
-            />
-            <SearchIconWrap><Search size={14} /></SearchIconWrap>
-          </SearchWrap>
+          {!pendingToken && (
+            <SearchWrap>
+              <SearchInput
+                ref={searchRef}
+                placeholder="Search tokens..."
+                value={tokenSearch}
+                onChange={(e) => setTokenSearch(e.target.value)}
+              />
+              <SearchIconWrap><Search size={14} /></SearchIconWrap>
+            </SearchWrap>
+          )}
 
           {/* Step 1: token list */}
           {!pendingToken && (
