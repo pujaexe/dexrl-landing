@@ -195,12 +195,14 @@ const HeroTrust = styled.div`
    SWAP WIDGET STYLED COMPONENTS
    ═══════════════════════════════════════════════════════ */
 
-const SwapBox = styled.div`
+const SwapBox = styled.div<{ $expanded?: boolean }>`
   position: relative;
   background: rgba(255,255,255,0.97);
   border: 1px solid rgba(255,255,255,0.55);
   border-radius: 20px;
   padding: 20px;
+  min-height: ${(p) => p.$expanded ? '490px' : 'auto'};
+  transition: min-height 0.3s ease;
   box-shadow:
     0 0 0 1px rgba(0,33,22,0.06),
     0 8px 32px -8px rgba(0,20,10,0.40),
@@ -253,6 +255,7 @@ const ConnectBackdrop = styled.div`
 `;
 
 const ConnectSheet = styled.div`
+  position: relative;
   width: 100%;
   background: #fff;
   border-radius: 16px 16px 0 0;
@@ -302,6 +305,94 @@ const ConnectOptionBadge = styled.span`
   color: var(--ink-mute);
   font-weight: 400;
   white-space: nowrap;
+`;
+
+const ConnectDivider = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+`;
+
+const ConnectDividerLine = styled.div`
+  flex: 1;
+  height: 1px;
+  background: #E6ECEA;
+`;
+
+const ConnectDividerText = styled.span`
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-mute);
+`;
+
+const WalletListScroll = styled.div`
+  max-height: 320px;
+  overflow-y: auto;
+  margin: 0 -16px;
+  padding: 0 16px;
+  scrollbar-width: thin;
+  scrollbar-color: #E6ECEA transparent;
+`;
+
+const WalletListHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+`;
+
+const BackButton = styled.button`
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: #F4F7F6;
+  color: var(--ink-mute);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  &:hover {
+    background: #E6ECEA;
+    color: var(--ink);
+  }
+`;
+
+const SheetCloseButton = styled.button`
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: #F4F7F6;
+  color: var(--ink-mute);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  &:hover {
+    background: #E6ECEA;
+    color: var(--ink);
+  }
+`;
+
+const WalletBadge = styled.span<{ $status?: string }>`
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: ${(p) => p.$status === "RECENT" ? "#26a17b" : "#4285F4"};
+  background: ${(p) => p.$status === "RECENT" ? "rgba(38,161,123,0.1)" : "rgba(66,133,244,0.1)"};
+  text-transform: uppercase;
 `;
 
 const SheetFooter = styled.div`
@@ -619,6 +710,50 @@ const GoogleBtn = styled.button`
   padding: 0;
   transition: border-color 0.15s;
   &:hover { border-color: var(--ink-mute); }
+`;
+
+const UserAvatarContainer = styled.div`
+  position: relative;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  border-radius: 50%;
+`;
+
+const AbstractAvatar = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+`;
+
+const WalletBadgeIcon = styled.div`
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #D8E3DF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  img, svg {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+  }
 `;
 
 const SignInLink = styled.button`
@@ -1026,6 +1161,27 @@ const DEFAULT_USDT: SelectedToken = {
   networkId: "polygon", networkLabel: "On Polygon", networkColor: "#8247E5",
 };
 
+const WALLET_LIST = [
+  { name: "Phantom", status: "RECENT", iconId: "phantom" },
+  { name: "Ronin Wallet", status: "DETECTED", iconId: "ronin" },
+  { name: "MetaMask", status: "DETECTED", iconId: "metamask" },
+  { name: "Solflare", status: "DETECTED", iconId: "solflare" },
+  { name: "Magic Eden", status: "DETECTED", iconId: "magiceden" },
+  { name: "Torus", iconId: "torus" },
+  { name: "Ledger", iconId: "ledger" },
+  { name: "MathWallet", iconId: "mathwallet" },
+  { name: "TokenPocket", iconId: "tokenpocket" },
+  { name: "Coinbase Wallet", iconId: "coinbase" },
+  { name: "Solong", iconId: "solong" },
+  { name: "Coin98", iconId: "coin98" },
+  { name: "SafePal", iconId: "safepal" },
+  { name: "Bitpie", iconId: "bitpie" },
+  { name: "Bitget", iconId: "bitget" },
+  { name: "Clover", iconId: "clover" },
+  { name: "Coinhub", iconId: "coinhub" },
+  { name: "WalletConnect", iconId: "walletconnect" }
+];
+
 /* ═══════════════════════════════════════════════════════
    SWAP WIDGET
    ═══════════════════════════════════════════════════════ */
@@ -1057,9 +1213,23 @@ const METAMASK_SVG = (size: number) => (
   </svg>
 );
 
+const WalletImage = ({ iconId, name }: { iconId?: string, name: string }) => {
+  const [error, setError] = useState(false);
+  if (error || !iconId) return <Wallet size={24} color="#6A9080" />;
+  return (
+    <img 
+      src={`https://cdn.jsdelivr.net/gh/GMWalletApp/crypto-icons@latest/assets/wallets/branded/${iconId}.svg`}
+      alt={name}
+      style={{ width: 24, height: 24, borderRadius: 6 }}
+      onError={() => setError(true)}
+    />
+  );
+};
+
 function SwapWidget() {
   const [connectMethod, setConnectMethod]       = useState<"google" | "metamask" | null>(null);
   const [showConnectSheet, setShowConnectSheet] = useState(false);
+  const [showMoreWallets, setShowMoreWallets]   = useState(false);
   const connected = connectMethod !== null;
 
   const MOCK_WALLET = "0x142FaE65689F7...4C1c0";
@@ -1123,7 +1293,10 @@ function SwapWidget() {
     else { setTokenSearch(""); setPendingToken(null); }
   }, [selectingToken]);
 
-  const openConnectSheet = () => setShowConnectSheet(true);
+  const openConnectSheet = () => {
+    setShowConnectSheet(true);
+    setShowMoreWallets(false);
+  };
 
   const handleConnected = (method: "google" | "metamask") => {
     setConnectMethod(method);
@@ -1195,7 +1368,7 @@ function SwapWidget() {
     "indonesian rupiah stablecoin".includes(tokenSearch.toLowerCase());
 
   return (
-    <SwapBox>
+    <SwapBox $expanded={showConnectSheet}>
       {/* ── Success overlay ── */}
       {swapStatus === "success" && (
         <SuccessOverlay>
@@ -1210,28 +1383,86 @@ function SwapWidget() {
         <ConnectBackdrop onClick={() => setShowConnectSheet(false)}>
           <ConnectSheet onClick={(e) => e.stopPropagation()}>
             <SheetHandle />
-            <SheetTitle>
-              {swapMode === "walletswap" ? "Connect Wallet" : "Connect Account"}
-            </SheetTitle>
+            {showMoreWallets ? (
+              <>
+                <WalletListHeader>
+                  <BackButton onClick={() => setShowMoreWallets(false)}>
+                    <ChevronLeft size={16} strokeWidth={2.5} />
+                  </BackButton>
+                  <SheetTitle style={{ textAlign: "center", width: "100%", margin: 0, fontSize: "16px" }}>
+                    Connect a wallet
+                  </SheetTitle>
+                </WalletListHeader>
+                
+                <WalletListScroll>
+                  {WALLET_LIST.map((wallet) => (
+                    <ConnectOption key={wallet.name} onClick={() => alert(`${wallet.name} integration coming soon!`)}>
+                      <WalletImage iconId={wallet.iconId} name={wallet.name} />
+                      {wallet.name}
+                      {wallet.status && (
+                        <WalletBadge $status={wallet.status}>
+                          {wallet.status}
+                        </WalletBadge>
+                      )}
+                    </ConnectOption>
+                  ))}
+                </WalletListScroll>
+              </>
+            ) : (
+              <>
+                <SheetCloseButton onClick={() => setShowConnectSheet(false)}>
+                  <X size={16} strokeWidth={2.5} />
+                </SheetCloseButton>
+                <SheetTitle style={{ textAlign: "center", marginBottom: "4px", fontSize: "20px" }}>
+                  Welcome back
+                </SheetTitle>
+                <div style={{ textAlign: "center", fontSize: "12px", color: "var(--ink-mute)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "16px", fontWeight: 600 }}>
+                  Sign In
+                </div>
 
-            <ConnectOption
-              $dim={swapMode === "walletswap"}
-              onClick={swapMode === "walletswap" ? undefined : () => handleConnected("google")}
-            >
-              {GOOGLE_SVG(26)}
-              Continue with Google
-              {swapMode === "walletswap" && <ConnectOptionBadge>IDR flows only</ConnectOptionBadge>}
-            </ConnectOption>
+                <ConnectOption
+                  $dim={swapMode === "walletswap"}
+                  onClick={swapMode === "walletswap" ? undefined : () => handleConnected("google")}
+                  style={{ justifyContent: "center" }}
+                >
+                  {GOOGLE_SVG(22)}
+                  Continue with Google
+                  {swapMode === "walletswap" && <ConnectOptionBadge>IDR flows only</ConnectOptionBadge>}
+                </ConnectOption>
 
-            <ConnectOption onClick={() => handleConnected("metamask")}>
-              {METAMASK_SVG(26)}
-              Continue with Metamask
-            </ConnectOption>
+                <ConnectDivider>
+                  <ConnectDividerLine />
+                  <ConnectDividerText>or connect a wallet</ConnectDividerText>
+                  <ConnectDividerLine />
+                </ConnectDivider>
 
-            <SheetFooter>
-              <SheetLink>Terms & Conditions</SheetLink>
-              <SheetLink>Privacy Policy</SheetLink>
-            </SheetFooter>
+                <ConnectOption onClick={() => handleConnected("metamask")}>
+                  {METAMASK_SVG(22)}
+                  MetaMask
+                  <WalletBadge $status="DETECTED">DETECTED</WalletBadge>
+                </ConnectOption>
+
+                <ConnectOption onClick={() => alert("WalletConnect integration coming soon!")}>
+                  <WalletImage iconId="walletconnect" name="WalletConnect" />
+                  WalletConnect
+                </ConnectOption>
+
+                <ConnectOption onClick={() => alert("Phantom integration coming soon!")}>
+                  <WalletImage iconId="phantom" name="Phantom" />
+                  Phantom
+                  <WalletBadge $status="RECENT">RECENT</WalletBadge>
+                </ConnectOption>
+                
+                <ConnectOption onClick={() => setShowMoreWallets(true)} style={{ justifyContent: "center", color: "var(--ink-soft)" }}>
+                  More wallets
+                </ConnectOption>
+
+                <SheetFooter>
+                  <SheetLink>Terms & Conditions</SheetLink>
+                  <SheetLink>Privacy Policy</SheetLink>
+                </SheetFooter>
+              </>
+            )}
           </ConnectSheet>
         </ConnectBackdrop>
       )}
@@ -1357,9 +1588,20 @@ function SwapWidget() {
               <UserEmail>
                 {connectMethod === "metamask" ? MOCK_WALLET : "puja.exe@gmail.com"}
               </UserEmail>
-              <GoogleBtn aria-label="Account">
-                {connectMethod === "metamask" ? METAMASK_SVG(18) : GOOGLE_SVG(16)}
-              </GoogleBtn>
+              {connectMethod === "metamask" ? (
+                <UserAvatarContainer>
+                  <AbstractAvatar>
+                    {MOCK_WALLET.substring(2,4).toUpperCase()}
+                  </AbstractAvatar>
+                  <WalletBadgeIcon>
+                    {METAMASK_SVG(12)}
+                  </WalletBadgeIcon>
+                </UserAvatarContainer>
+              ) : (
+                <GoogleBtn aria-label="Account">
+                  {GOOGLE_SVG(16)}
+                </GoogleBtn>
+              )}
             </>
           ) : (
             <SignInLink onClick={openConnectSheet}>Sign in</SignInLink>

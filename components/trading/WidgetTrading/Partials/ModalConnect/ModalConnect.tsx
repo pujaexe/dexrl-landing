@@ -36,15 +36,19 @@ const ModalConnect: React.FC<ModalConnectProps> = ({ open, onClose }) => {
           "bg-white text-[#003E2C]",
           open ? "translate-y-0" : "translate-y-full"
         )}
-        style={{ minHeight: "40%" }}
+        style={{ minHeight: "40%", maxHeight: "90%", overflowY: "auto" }}
       >
-        <div className="flex justify-center py-3">
+        <div className="flex justify-center py-3 sticky top-0 bg-white z-10">
           <div className="w-12 h-1.5 rounded-full bg-[#ECF0EF]" />
         </div>
 
-        <div className="px-4 flex flex-col gap-3">
-          <div className="text-sm font-semibold text-[#2D5C47]">
-            Connect Account
+        <div className="px-4 flex flex-col gap-4">
+          <div className="text-xl font-semibold text-[#003E2C] text-center mb-1">
+            Welcome back
+          </div>
+          
+          <div className="text-[12px] font-semibold text-[#6A9080] uppercase tracking-[0.08em] mb-1">
+            Sign In
           </div>
 
           <ButtonConnect
@@ -53,45 +57,79 @@ const ModalConnect: React.FC<ModalConnectProps> = ({ open, onClose }) => {
             onClick={handleGoogleLogin}
             icon="flat-color-icons:google"
             title="Continue with Google"
+            isCenter
           />
 
-          <div>
+          <div className="flex items-center gap-3 my-2">
+            <div className="flex-1 h-px bg-[#D8E3DF]"></div>
+            <span className="text-[13px] font-medium text-[#6A9080]">or connect a wallet</span>
+            <div className="flex-1 h-px bg-[#D8E3DF]"></div>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <div>
+              <ButtonConnect
+                isMaintenance={!ONRAMP_METAMASK_ACTIVE}
+                isLoading={isMetamaskLoading}
+                onClick={handleMetamaskLogin}
+                icon="https://cdn.jsdelivr.net/gh/GMWalletApp/crypto-icons@latest/assets/wallets/branded/metamask.svg"
+                title="MetaMask"
+                rightElement={
+                  <span className="text-[10px] font-bold tracking-[0.05em] px-2 py-[3px] rounded-full text-[#4285F4] bg-[rgba(66,133,244,0.1)] uppercase ml-auto">DETECTED</span>
+                }
+              />
+              {errorMetamask && (
+                <div className="text-red-500 text-xs mt-1">{errorMetamask}</div>
+              )}
+            </div>
+
+            {/* Additional Wallet Providers (Placeholders) */}
             <ButtonConnect
-              isMaintenance={!ONRAMP_METAMASK_ACTIVE}
-              isLoading={isMetamaskLoading}
-              onClick={handleMetamaskLogin}
-              icon="logos:metamask-icon"
-              title="Continue with Metamask"
+              icon="https://cdn.jsdelivr.net/gh/GMWalletApp/crypto-icons@latest/assets/wallets/branded/walletconnect.svg"
+              title="WalletConnect"
+              onClick={() => alert("WalletConnect integration coming soon!")}
             />
-            {errorMetamask && (
-              <div className="text-red-500 text-xs mt-1">{errorMetamask}</div>
-            )}
+            
+            <ButtonConnect
+              icon="https://cdn.jsdelivr.net/gh/GMWalletApp/crypto-icons@latest/assets/wallets/branded/phantom.svg"
+              title="Phantom"
+              onClick={() => alert("Phantom integration coming soon!")}
+              rightElement={
+                <span className="text-[10px] font-bold tracking-[0.05em] px-2 py-[3px] rounded-full text-[#26a17b] bg-[rgba(38,161,123,0.1)] uppercase ml-auto">RECENT</span>
+              }
+            />
           </div>
         </div>
 
-        <hr className="my-4 border-[#C2CFCB]" />
+        <hr className="my-6 border-[#C2CFCB]" />
 
         {/* Footer Links */}
-        <div className="">
-          <div className="flex flex-col px-4 pb-4 gap-3 text-xs transition-colors text-[#6A9080]">
-            <a
-              href={links.terms_of_service}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="text-left hover:underline cursor-pointer hover:text-[#003E2C]">
-                Terms & Conditions
-              </button>
-            </a>
-            <a
-              href={links.privacy_policy}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="text-left hover:underline cursor-pointer hover:text-[#003E2C]">
-                Privacy Policy
-              </button>
-            </a>
+        <div className="px-4 pb-6">
+          <div className="flex flex-col gap-2 text-xs transition-colors text-[#6A9080] items-center">
+            <span className="text-center">
+              By connecting your wallet, you agree to our
+            </span>
+            <div className="flex gap-3">
+              <a
+                href={links.terms_of_service}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="text-left font-medium underline cursor-pointer hover:text-[#003E2C]">
+                  Terms of Service
+                </button>
+              </a>
+              <span>&</span>
+              <a
+                href={links.privacy_policy}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="text-left font-medium underline cursor-pointer hover:text-[#003E2C]">
+                  Privacy Policy
+                </button>
+              </a>
+            </div>
           </div>
         </div>
       </div>

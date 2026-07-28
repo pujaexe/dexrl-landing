@@ -9,9 +9,9 @@ interface IProps {
     isLoading?: boolean;
     onClick?: () => void;
     icon: string;
-    title: string;
     isCenter?: boolean;
     className?: string;
+    rightElement?: React.ReactNode;
 }
 const ButtonConnect: FC<IProps> = ({
     isMaintenance,
@@ -21,6 +21,7 @@ const ButtonConnect: FC<IProps> = ({
     title,
     isCenter,
     className,
+    rightElement,
 }) => {
     return (
         <MaintenanceMessage isMaintenance={isMaintenance}>
@@ -38,9 +39,14 @@ const ButtonConnect: FC<IProps> = ({
                 {isLoading ? (
                     <Loader2 className="w-4 h-4 animate-spin text-[#003E2C]" />
                 ) : (
-                    <Iconify name={icon} className="text-2xl" />
+                    icon.startsWith("http") ? (
+                        <img src={icon} alt={title} className="w-6 h-6 rounded-md object-cover" />
+                    ) : (
+                        <Iconify name={icon} className="text-2xl" />
+                    )
                 )}
-                <span className="text-sm">{isLoading ? "Loading..." : title}</span>
+                <span className="text-sm flex-1 text-left">{isLoading ? "Loading..." : title}</span>
+                {rightElement && <div>{rightElement}</div>}
             </button>
         </MaintenanceMessage>
     );

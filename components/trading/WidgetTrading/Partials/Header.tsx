@@ -39,7 +39,21 @@ const Header = () => {
                         <Iconify name="flat-color-icons:google" className="text-2xl" />
                     )}
                     {isConnected && loginSession?.provider === "metamask" && (
-                        <Iconify name="logos:metamask-icon" className="text-xl" />
+                        <div className="relative w-full h-full rounded-[12px]">
+                            <div 
+                                className="w-full h-full rounded-[12px] flex items-center justify-center text-white font-mono font-bold shadow-sm text-sm"
+                                style={{ background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)" }}
+                            >
+                                {loginSession?.address?.substring(2, 4).toUpperCase()}
+                            </div>
+                            <div className="absolute -bottom-1.5 -right-1.5 w-[20px] h-[20px] rounded-full bg-white border border-[#D8E3DF] flex items-center justify-center overflow-hidden shadow-sm">
+                                <img 
+                                    src="https://cdn.jsdelivr.net/gh/GMWalletApp/crypto-icons@latest/assets/wallets/branded/metamask.svg" 
+                                    className="w-[14px] h-[14px] rounded-[3px]"
+                                    alt="MetaMask"
+                                />
+                            </div>
+                        </div>
                     )}
                 </button>
             </div>
