@@ -1,4 +1,4 @@
-import { getSettingByName } from "@/api/settingsService";
+import { getSettingByName } from "@/services/settingsService";
 
 export const formatAmountWithDecimals = async (
   amount: string | number,

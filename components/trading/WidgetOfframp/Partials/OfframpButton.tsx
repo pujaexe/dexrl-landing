@@ -6,7 +6,7 @@ import { RefreshCcwIcon, XIcon } from "lucide-react";
 import type { ButtonHTMLAttributes, FC } from "react";
 import { useNavigate, useParams } from "@/lib/router-compat";
 import type { OfframpTransactionData } from "../WidgetOfframp.types";
-import { cancelOfframpTransaction } from "@/api/offrampService";
+import { cancelOfframpTransaction } from "@/services/offrampService";
 
 interface IOfframpButtonProps {
     transactionData?: OfframpTransactionData;

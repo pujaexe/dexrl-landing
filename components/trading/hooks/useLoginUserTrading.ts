@@ -3,9 +3,9 @@
 import {
     loginWithGoogleBackend,
     loginWithMetamaskBackend
-} from "@/api/authService";
-import { POLYGON_CHAIN_ID } from "@/api/swcService";
-import { getSWCAddress, getEOAAddress } from "@/api/addressService";
+} from "@/services/authService";
+import { POLYGON_CHAIN_ID } from "@/services/swcService";
+import { getSWCAddress, getEOAAddress } from "@/services/addressService";
 import { useTradingAuthStore } from "@/store/tradingAuthStore";
 import { useGoogleLogin } from "@react-oauth/google";
 import { BrowserProvider } from "ethers";

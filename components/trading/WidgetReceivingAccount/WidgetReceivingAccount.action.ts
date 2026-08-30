@@ -1,7 +1,7 @@
 "use client";
 
-import { addBankAccount, checkBankAccountInIdrx } from "@/api/oxo/idrx/idrx";
-import { getBankTransferList, saveBank } from "@/api/bankService";
+import { addBankAccount, checkBankAccountInIdrx } from "@/services/oxo/idrx/idrx";
+import { getBankTransferList, saveBank } from "@/services/bankService";
 import { useTradingAuthStore } from "@/store/tradingAuthStore";
 import { useReceivingAccountStore, type ReceivingAccount } from "@/store/receivingAccountStore";
 import { useMutation, useQuery } from "@tanstack/react-query";

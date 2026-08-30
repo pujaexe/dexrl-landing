@@ -1,7 +1,7 @@
 "use client";
 
-import type { QuoteData } from "@/api/onrampService";
-import type { OfframpQuoteData } from "@/api/offrampService";
+import type { QuoteData } from "@/services/onrampService";
+import type { OfframpQuoteData } from "@/services/offrampService";
 import RenderIf from "@/components/Renderif";
 import { Skeleton } from "@/components/skeleton";
 import { formatTokenAmountWithoutRounding } from "@/helper";

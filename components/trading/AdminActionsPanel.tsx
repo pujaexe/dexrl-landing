@@ -11,7 +11,7 @@ import { useModal } from "@/context/ModalContext";
 import {
   setTransactionFailed,
   retryTransactionAdmin,
-} from "@/api/adminTransactionActions";
+} from "@/services/adminTransactionActions";
 
 interface Props {
   trxNo: string;

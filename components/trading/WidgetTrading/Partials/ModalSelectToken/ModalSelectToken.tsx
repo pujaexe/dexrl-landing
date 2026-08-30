@@ -4,7 +4,7 @@ import {
   getListChains,
   getListOtherToken,
   getListTokenNew,
-} from "@/api/tokenService";
+} from "@/services/tokenService";
 import { Iconify } from "@/components/icon/Iconify";
 import RenderIf from "@/components/Renderif";
 import type { ChainInterface, TokenInterface } from "@/data";
@@ -22,7 +22,7 @@ import React, {
   useState,
 } from "react";
 import { useParams } from "@/lib/router-compat";
-import { getAffiliateByUsername } from "@/api/affiliateService";
+import { getAffiliateByUsername } from "@/services/affiliateService";
 import type { AffiliateUserInterface } from "@/data/interface";
 import {
   buildTokenWhitelist,

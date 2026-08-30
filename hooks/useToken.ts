@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import type { Token } from "../data/interface";
-import { fetchTokenList } from "../api/tokenServices";
+import { fetchTokenList } from "../services/tokenServices";
 
 export function useToken() {
   const [data, setData] = useState<Token[]>([]);

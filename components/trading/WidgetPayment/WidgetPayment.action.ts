@@ -1,6 +1,6 @@
 "use client";
 
-import { getTransaction } from "@/api/transactionService";
+import { getTransaction } from "@/services/transactionService";
 import { useTradingFormStore } from "@/store/tradingFormStore";
 import { useTransactionRealtimeStore } from "@/store/transactionRealtimeStore";
 import { useQuery } from "@tanstack/react-query";

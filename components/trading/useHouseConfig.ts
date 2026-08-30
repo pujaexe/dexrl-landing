@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getAffiliateByUsername } from "@/api/affiliateService";
+import { getAffiliateByUsername } from "@/services/affiliateService";
 import { HOUSE_USERNAME } from "@/lib/router-compat";
 
 export interface HouseConfig {

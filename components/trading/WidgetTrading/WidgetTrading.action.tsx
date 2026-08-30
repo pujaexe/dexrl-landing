@@ -1,9 +1,9 @@
 "use client";
 
-import { getQuote, type QuoteRequest } from "@/api/onrampService";
-import { getOfframpQuote, createOfframpTransaction, type OfframpQuoteRequest, type OfframpQuoteData } from "@/api/offrampService";
-import { createTradingTransaction } from "@/api/transactionService";
-import { getAffiliateByUsername } from "@/api/affiliateService";
+import { getQuote, type QuoteRequest } from "@/services/onrampService";
+import { getOfframpQuote, createOfframpTransaction, type OfframpQuoteRequest, type OfframpQuoteData } from "@/services/offrampService";
+import { createTradingTransaction } from "@/services/transactionService";
+import { getAffiliateByUsername } from "@/services/affiliateService";
 import { useModal } from "@/context/ModalContext";
 import type { AffiliateUserInterface } from "@/data/interface";
 import { formatTokenAmountWithoutRounding } from "@/helper";

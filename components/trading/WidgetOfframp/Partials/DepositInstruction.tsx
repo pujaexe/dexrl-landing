@@ -9,7 +9,7 @@ import { formatNumber } from "@/helper";
 import { formatDuration } from "@/helper/date";
 import type { OfframpTransactionData } from "../WidgetOfframp.types";
 import { DEPOSIT_VALIDITY_MS } from "../WidgetOfframp.data";
-import { cancelOfframpTransaction } from "@/api/offrampService";
+import { cancelOfframpTransaction } from "@/services/offrampService";
 import { useModal } from "@/context/ModalContext";
 
 interface DepositInstructionProps {

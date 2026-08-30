@@ -1,4 +1,4 @@
-import { lifiService } from "@/api/lifiService";
+import { lifiService } from "@/services/lifiService";
 import { formatEther } from "ethers";
 import { createPublicClient, createWalletClient, custom, erc20Abi, encodeFunctionData, http, type Chain } from "viem";
 import { base, polygon, mainnet, bsc } from "viem/chains";

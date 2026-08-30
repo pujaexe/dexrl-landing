@@ -1,6 +1,6 @@
 "use client";
 
-import { getMintRequest } from "@/api/transactionService";
+import { getMintRequest } from "@/services/transactionService";
 import { useModal } from "@/context/ModalContext";
 import { notification } from "@/components/ui/toast";
 import clsx from "clsx";

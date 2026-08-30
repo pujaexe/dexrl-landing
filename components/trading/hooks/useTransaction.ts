@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { PatchTransactionProgressRequest } from "../WidgetPayment/WidgetPayment.types";
 import { useParams } from "@/lib/router-compat";
-import { patchTransactionProgress, updateUserTransaction, type IParamUpdateUserTransaction } from "@/api/transactionService";
+import { patchTransactionProgress, updateUserTransaction, type IParamUpdateUserTransaction } from "@/services/transactionService";
 
 const useTransaction = () => {
     const queryClient = useQueryClient();

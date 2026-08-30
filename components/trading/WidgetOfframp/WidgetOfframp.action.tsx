@@ -1,6 +1,6 @@
 "use client";
 
-import { getOfframpTransaction, getOfframpDepositStatus, cancelOfframpTransaction, retryOfframpDeposit } from "@/api/offrampService";
+import { getOfframpTransaction, getOfframpDepositStatus, cancelOfframpTransaction, retryOfframpDeposit } from "@/services/offrampService";
 import { transferTokenToSWC } from "@/helper/smartAccountHelper";
 import { useModal } from "@/context/ModalContext";
 import { useTradingAuthStore } from "@/store/tradingAuthStore";

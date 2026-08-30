@@ -1,6 +1,6 @@
 "use client";
 
-import { getBankList } from "@/api/bankService";
+import { getBankList } from "@/services/bankService";
 import { useTradingAuthStore } from "@/store/tradingAuthStore";
 import { useReceivingAccountStore, type ReceivingAccount } from "@/store/receivingAccountStore";
 import { useQuery } from "@tanstack/react-query";

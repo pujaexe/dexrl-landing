@@ -1,6 +1,6 @@
 "use client";
 
-import { getUserTransactionHistory } from "@/api/transactionService";
+import { getUserTransactionHistory } from "@/services/transactionService";
 import { formatTokenAmount } from "@/helper";
 import { normalizeTxDate } from "@/helper/date";
 import { useDebouncedSearch } from "@/hooks/useDebounce";

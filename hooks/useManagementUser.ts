@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
-import { getAffiliateAccount } from "@/api/affiliateService";
+import { getAffiliateAccount } from "@/services/affiliateService";
 
 /**
  * Returns whether the currently logged-in user is a management admin.

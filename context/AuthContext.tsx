@@ -4,7 +4,7 @@ import { createContext, useContext, useState, type ReactNode, useEffect } from "
 import { supabase } from "../lib/supabaseClient";
 import Cookies from "js-cookie";
 import { useNavigate } from "@/lib/router-compat";
-import { affiliateLogout, getCurrentUserData } from "@/api/authService";
+import { affiliateLogout, getCurrentUserData } from "@/services/authService";
 
 interface AuthContextType {
   userSession: any;
